@@ -1,0 +1,55 @@
+aid: lavu
+name: Lavu
+description: >-
+  Lavu is a cloud-based iPad restaurant point-of-sale system, now positioned as
+  an AI-powered restaurant intelligence platform, serving restaurants, bars, and
+  hospitality businesses with POS, payments, inventory, and reporting. Lavu
+  promotes an open API that lets developers and restaurants extend the point of
+  sale, build peripheral components, and create tailored integrations without
+  waiting on vendor roadmaps. The API is a POST-based REST-style interface
+  exposing tables such as menu_groups, menu_categories, menu_items, tables,
+  orders, order_contents, order_payments, ingredients, and ingredient_usage.
+  Authentication uses dataname, key, and token credentials retrieved from the
+  API tab of the POSLavu Control Panel. The developer documentation is gated
+  behind the control panel and is not publicly published; API access comes with
+  account service.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - Restaurant
+  - Point of Sale
+  - Payments
+  - Inventory
+  - Menu Management
+url: https://raw.githubusercontent.com/api-evangelist/lavu/refs/heads/main/apis.yml
+created: '2026-06-02'
+modified: '2026-06-02'
+specificationVersion: '0.19'
+apis:
+  - aid: lavu:rest-api
+    name: Lavu (POSLavu) API
+    description: >-
+      A POST-based API for the Lavu restaurant POS exposing tables including
+      menu_groups, menu_categories, menu_items, tables, orders, order_contents,
+      order_payments, ingredients, and ingredient_usage. Requests require
+      dataname, key, table, and token parameters; credentials come from the API
+      tab of the POSLavu Control Panel. Documentation is account-gated rather
+      than publicly published.
+    tags:
+      - Point of Sale
+      - Orders
+      - Menu
+      - Inventory
+    properties:
+      - type: Documentation
+        url: https://lavu.com/integrations/
+common:
+  - type: Website
+    url: https://lavu.com
+  - type: Blog
+    url: https://lavu.com/blog/
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/lavu-inc
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
