@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MenuGroup",
+  "description": "A menu group (e.g. Dinner) from the menu_groups table.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/lavu/refs/heads/main/json-schema/poslavu-api-menu-group-schema.json",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Menu group identifier.",
+      "example": "8"
+    },
+    "menu_id": {
+      "type": "string",
+      "description": "Identifier of the menu this group belongs to.",
+      "example": "11"
+    },
+    "group_name": {
+      "type": "string",
+      "description": "Display name of the menu group.",
+      "example": "Dinner"
+    },
+    "orderby": {
+      "type": "string",
+      "description": "Sort ordering value.",
+      "example": ""
+    }
+  }
+}

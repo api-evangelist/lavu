@@ -1,0 +1,657 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "lavu": "https://lavu.com/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "MenuGroup": "lavu:MenuGroup",
+    "id": {
+      "@id": "lavu:id",
+      "@type": "xsd:string"
+    },
+    "menuId": {
+      "@id": "lavu:menu_id",
+      "@type": "xsd:string"
+    },
+    "groupName": {
+      "@id": "lavu:group_name",
+      "@type": "xsd:string"
+    },
+    "orderby": {
+      "@id": "lavu:orderby",
+      "@type": "xsd:string"
+    },
+    "MenuCategory": "lavu:MenuCategory",
+    "groupId": {
+      "@id": "lavu:group_id",
+      "@type": "xsd:string"
+    },
+    "name": {
+      "@id": "schema:name"
+    },
+    "image": {
+      "@id": "lavu:image",
+      "@type": "xsd:string"
+    },
+    "description": {
+      "@id": "schema:description"
+    },
+    "active": {
+      "@id": "lavu:active",
+      "@type": "xsd:string"
+    },
+    "print": {
+      "@id": "lavu:print",
+      "@type": "xsd:string"
+    },
+    "lastModifiedDate": {
+      "@id": "lavu:last_modified_date",
+      "@type": "xsd:string"
+    },
+    "printer": {
+      "@id": "lavu:printer",
+      "@type": "xsd:string"
+    },
+    "modifierListId": {
+      "@id": "lavu:modifier_list_id",
+      "@type": "xsd:string"
+    },
+    "applyTaxrate": {
+      "@id": "lavu:apply_taxrate",
+      "@type": "xsd:string"
+    },
+    "customTaxrate": {
+      "@id": "lavu:custom_taxrate",
+      "@type": "xsd:string"
+    },
+    "forcedModifierGroupId": {
+      "@id": "lavu:forced_modifier_group_id",
+      "@type": "xsd:string"
+    },
+    "printOrder": {
+      "@id": "lavu:print_order",
+      "@type": "xsd:string"
+    },
+    "superGroupId": {
+      "@id": "lavu:super_group_id",
+      "@type": "xsd:string"
+    },
+    "MenuItem": "lavu:MenuItem",
+    "categoryId": {
+      "@id": "lavu:category_id",
+      "@type": "xsd:string"
+    },
+    "price": {
+      "@id": "lavu:price",
+      "@type": "xsd:string"
+    },
+    "image2": {
+      "@id": "lavu:image2",
+      "@type": "xsd:string"
+    },
+    "image3": {
+      "@id": "lavu:image3",
+      "@type": "xsd:string"
+    },
+    "miscContent": {
+      "@id": "lavu:misc_content",
+      "@type": "xsd:string"
+    },
+    "options1": {
+      "@id": "lavu:options1",
+      "@type": "xsd:string"
+    },
+    "options2": {
+      "@id": "lavu:options2",
+      "@type": "xsd:string"
+    },
+    "options3": {
+      "@id": "lavu:options3",
+      "@type": "xsd:string"
+    },
+    "quickItem": {
+      "@id": "lavu:quick_item",
+      "@type": "xsd:string"
+    },
+    "ingredients": {
+      "@id": "lavu:ingredients",
+      "@type": "xsd:string"
+    },
+    "openItem": {
+      "@id": "lavu:open_item",
+      "@type": "xsd:string"
+    },
+    "hiddenValue": {
+      "@id": "lavu:hidden_value",
+      "@type": "xsd:string"
+    },
+    "hiddenValue2": {
+      "@id": "lavu:hidden_value2",
+      "@type": "xsd:string"
+    },
+    "allowDeposit": {
+      "@id": "lavu:allow_deposit",
+      "@type": "xsd:string"
+    },
+    "UPC": {
+      "@id": "lavu:UPC",
+      "@type": "xsd:string"
+    },
+    "hiddenValue3": {
+      "@id": "lavu:hidden_value3",
+      "@type": "xsd:string"
+    },
+    "invCount": {
+      "@id": "lavu:inv_count",
+      "@type": "xsd:string"
+    },
+    "showInApp": {
+      "@id": "lavu:show_in_app",
+      "@type": "xsd:string"
+    },
+    "Table": "lavu:Table",
+    "locId": {
+      "@id": "lavu:loc_id",
+      "@type": "xsd:string"
+    },
+    "coordX": {
+      "@id": "lavu:coord_x",
+      "@type": "xsd:string"
+    },
+    "coordY": {
+      "@id": "lavu:coord_y",
+      "@type": "xsd:string"
+    },
+    "shapes": {
+      "@id": "lavu:shapes",
+      "@type": "xsd:string"
+    },
+    "widths": {
+      "@id": "lavu:widths",
+      "@type": "xsd:string"
+    },
+    "heights": {
+      "@id": "lavu:heights",
+      "@type": "xsd:string"
+    },
+    "names": {
+      "@id": "lavu:names",
+      "@type": "xsd:string"
+    },
+    "Order": "lavu:Order",
+    "orderId": {
+      "@id": "lavu:order_id",
+      "@type": "xsd:string"
+    },
+    "location": {
+      "@id": "lavu:location",
+      "@type": "xsd:string"
+    },
+    "locationId": {
+      "@id": "lavu:location_id",
+      "@type": "xsd:string"
+    },
+    "opened": {
+      "@id": "lavu:opened",
+      "@type": "xsd:string"
+    },
+    "closed": {
+      "@id": "lavu:closed",
+      "@type": "xsd:string"
+    },
+    "subtotal": {
+      "@id": "lavu:subtotal",
+      "@type": "xsd:string"
+    },
+    "taxrate": {
+      "@id": "lavu:taxrate",
+      "@type": "xsd:string"
+    },
+    "tax": {
+      "@id": "lavu:tax",
+      "@type": "xsd:string"
+    },
+    "total": {
+      "@id": "lavu:total",
+      "@type": "xsd:string"
+    },
+    "server": {
+      "@id": "lavu:server",
+      "@type": "xsd:string"
+    },
+    "serverId": {
+      "@id": "lavu:server_id",
+      "@type": "xsd:string"
+    },
+    "tablename": {
+      "@id": "lavu:tablename",
+      "@type": "xsd:string"
+    },
+    "sendStatus": {
+      "@id": "lavu:send_status",
+      "@type": "xsd:string"
+    },
+    "discount": {
+      "@id": "lavu:discount",
+      "@type": "xsd:string"
+    },
+    "discountSh": {
+      "@id": "lavu:discount_sh",
+      "@type": "xsd:string"
+    },
+    "gratuity": {
+      "@id": "lavu:gratuity",
+      "@type": "xsd:string"
+    },
+    "gratuityPercent": {
+      "@id": "lavu:gratuity_percent",
+      "@type": "xsd:string"
+    },
+    "cardGratuity": {
+      "@id": "lavu:card_gratuity",
+      "@type": "xsd:string"
+    },
+    "cashPaid": {
+      "@id": "lavu:cash_paid",
+      "@type": "xsd:string"
+    },
+    "cardPaid": {
+      "@id": "lavu:card_paid",
+      "@type": "xsd:string"
+    },
+    "giftCertificate": {
+      "@id": "lavu:gift_certificate",
+      "@type": "xsd:string"
+    },
+    "changeAmount": {
+      "@id": "lavu:change_amount",
+      "@type": "xsd:string"
+    },
+    "reopenRefund": {
+      "@id": "lavu:reopen_refund",
+      "@type": "xsd:string"
+    },
+    "void": {
+      "@id": "lavu:void",
+      "@type": "xsd:string"
+    },
+    "cashier": {
+      "@id": "lavu:cashier",
+      "@type": "xsd:string"
+    },
+    "cashierId": {
+      "@id": "lavu:cashier_id",
+      "@type": "xsd:string"
+    },
+    "authBy": {
+      "@id": "lavu:auth_by",
+      "@type": "xsd:string"
+    },
+    "authById": {
+      "@id": "lavu:auth_by_id",
+      "@type": "xsd:string"
+    },
+    "guests": {
+      "@id": "lavu:guests",
+      "@type": "xsd:string"
+    },
+    "email": {
+      "@id": "schema:email"
+    },
+    "permission": {
+      "@id": "lavu:permission",
+      "@type": "xsd:string"
+    },
+    "checkHasPrinted": {
+      "@id": "lavu:check_has_printed",
+      "@type": "xsd:string"
+    },
+    "noOfChecks": {
+      "@id": "lavu:no_of_checks",
+      "@type": "xsd:string"
+    },
+    "cardDesc": {
+      "@id": "lavu:card_desc",
+      "@type": "xsd:string"
+    },
+    "transactionId": {
+      "@id": "lavu:transaction_id",
+      "@type": "xsd:string"
+    },
+    "multipleTaxRates": {
+      "@id": "lavu:multiple_tax_rates",
+      "@type": "xsd:string"
+    },
+    "tab": {
+      "@id": "lavu:tab",
+      "@type": "xsd:string"
+    },
+    "originalId": {
+      "@id": "lavu:original_id",
+      "@type": "xsd:string"
+    },
+    "depositStatus": {
+      "@id": "lavu:deposit_status",
+      "@type": "xsd:string"
+    },
+    "register": {
+      "@id": "lavu:register",
+      "@type": "xsd:string"
+    },
+    "refunded": {
+      "@id": "lavu:refunded",
+      "@type": "xsd:string"
+    },
+    "refundNotes": {
+      "@id": "lavu:refund_notes",
+      "@type": "xsd:string"
+    },
+    "refundedCc": {
+      "@id": "lavu:refunded_cc",
+      "@type": "xsd:string"
+    },
+    "refundNotesCc": {
+      "@id": "lavu:refund_notes_cc",
+      "@type": "xsd:string"
+    },
+    "refundedBy": {
+      "@id": "lavu:refunded_by",
+      "@type": "xsd:string"
+    },
+    "refundedByCc": {
+      "@id": "lavu:refunded_by_cc",
+      "@type": "xsd:string"
+    },
+    "cashTip": {
+      "@id": "lavu:cash_tip",
+      "@type": "xsd:string"
+    },
+    "discountValue": {
+      "@id": "lavu:discount_value",
+      "@type": "xsd:string"
+    },
+    "reopenedDatetime": {
+      "@id": "lavu:reopened_datetime",
+      "@type": "xsd:string"
+    },
+    "discountType": {
+      "@id": "lavu:discount_type",
+      "@type": "xsd:string"
+    },
+    "depositAmount": {
+      "@id": "lavu:deposit_amount",
+      "@type": "xsd:string"
+    },
+    "subtotalWithoutDeposit": {
+      "@id": "lavu:subtotal_without_deposit",
+      "@type": "xsd:string"
+    },
+    "togoStatus": {
+      "@id": "lavu:togo_status",
+      "@type": "xsd:string"
+    },
+    "togoPhone": {
+      "@id": "lavu:togo_phone",
+      "@type": "xsd:string"
+    },
+    "togoTime": {
+      "@id": "lavu:togo_time",
+      "@type": "xsd:string"
+    },
+    "cashApplied": {
+      "@id": "lavu:cash_applied",
+      "@type": "xsd:string"
+    },
+    "roundingAmount": {
+      "@id": "lavu:rounding_amount",
+      "@type": "xsd:string"
+    },
+    "OrderContent": "lavu:OrderContent",
+    "item": {
+      "@id": "lavu:item",
+      "@type": "xsd:string"
+    },
+    "quantity": {
+      "@id": "lavu:quantity",
+      "@type": "xsd:string"
+    },
+    "options": {
+      "@id": "lavu:options",
+      "@type": "xsd:string"
+    },
+    "special": {
+      "@id": "lavu:special",
+      "@type": "xsd:string"
+    },
+    "modifyPrice": {
+      "@id": "lavu:modify_price",
+      "@type": "xsd:string"
+    },
+    "check": {
+      "@id": "lavu:check",
+      "@type": "xsd:string"
+    },
+    "seat": {
+      "@id": "lavu:seat",
+      "@type": "xsd:string"
+    },
+    "itemId": {
+      "@id": "lavu:item_id",
+      "@type": "xsd:string"
+    },
+    "forcedModifiersPrice": {
+      "@id": "lavu:forced_modifiers_price",
+      "@type": "xsd:string"
+    },
+    "course": {
+      "@id": "lavu:course",
+      "@type": "xsd:string"
+    },
+    "depositInfo": {
+      "@id": "lavu:deposit_info",
+      "@type": "xsd:string"
+    },
+    "discountAmount": {
+      "@id": "lavu:discount_amount",
+      "@type": "xsd:string"
+    },
+    "afterDiscount": {
+      "@id": "lavu:after_discount",
+      "@type": "xsd:string"
+    },
+    "subtotalWithMods": {
+      "@id": "lavu:subtotal_with_mods",
+      "@type": "xsd:string"
+    },
+    "taxAmount": {
+      "@id": "lavu:tax_amount",
+      "@type": "xsd:string"
+    },
+    "notes": {
+      "@id": "lavu:notes",
+      "@type": "xsd:string"
+    },
+    "totalWithTax": {
+      "@id": "lavu:total_with_tax",
+      "@type": "xsd:string"
+    },
+    "itaxRate": {
+      "@id": "lavu:itax_rate",
+      "@type": "xsd:string"
+    },
+    "itax": {
+      "@id": "lavu:itax",
+      "@type": "xsd:string"
+    },
+    "taxRate1": {
+      "@id": "lavu:tax_rate1",
+      "@type": "xsd:string"
+    },
+    "tax1": {
+      "@id": "lavu:tax1",
+      "@type": "xsd:string"
+    },
+    "taxRate2": {
+      "@id": "lavu:tax_rate2",
+      "@type": "xsd:string"
+    },
+    "tax2": {
+      "@id": "lavu:tax2",
+      "@type": "xsd:string"
+    },
+    "taxRate3": {
+      "@id": "lavu:tax_rate3",
+      "@type": "xsd:string"
+    },
+    "tax3": {
+      "@id": "lavu:tax3",
+      "@type": "xsd:string"
+    },
+    "OrderPayment": "lavu:OrderPayment",
+    "amount": {
+      "@id": "lavu:amount",
+      "@type": "xsd:string"
+    },
+    "refundPnref": {
+      "@id": "lavu:refund_pnref",
+      "@type": "xsd:string"
+    },
+    "tipAmount": {
+      "@id": "lavu:tip_amount",
+      "@type": "xsd:string"
+    },
+    "auth": {
+      "@id": "lavu:auth",
+      "@type": "xsd:string"
+    },
+    "processed": {
+      "@id": "lavu:processed",
+      "@type": "xsd:string"
+    },
+    "authCode": {
+      "@id": "lavu:auth_code",
+      "@type": "xsd:string"
+    },
+    "cardType": {
+      "@id": "lavu:card_type",
+      "@type": "xsd:string"
+    },
+    "datetime": {
+      "@id": "lavu:datetime",
+      "@type": "xsd:string"
+    },
+    "payType": {
+      "@id": "lavu:pay_type",
+      "@type": "xsd:string"
+    },
+    "voided": {
+      "@id": "lavu:voided",
+      "@type": "xsd:string"
+    },
+    "voidNotes": {
+      "@id": "lavu:void_notes",
+      "@type": "xsd:string"
+    },
+    "voidedBy": {
+      "@id": "lavu:voided_by",
+      "@type": "xsd:string"
+    },
+    "voidPnref": {
+      "@id": "lavu:void_pnref",
+      "@type": "xsd:string"
+    },
+    "gotResponse": {
+      "@id": "lavu:got_response",
+      "@type": "xsd:string"
+    },
+    "transtype": {
+      "@id": "lavu:transtype",
+      "@type": "xsd:string"
+    },
+    "splitTenderId": {
+      "@id": "lavu:split_tender_id",
+      "@type": "xsd:string"
+    },
+    "tempData": {
+      "@id": "lavu:temp_data",
+      "@type": "xsd:string"
+    },
+    "change": {
+      "@id": "lavu:change",
+      "@type": "xsd:string"
+    },
+    "totalCollected": {
+      "@id": "lavu:total_collected",
+      "@type": "xsd:string"
+    },
+    "recordNo": {
+      "@id": "lavu:record_no",
+      "@type": "xsd:string"
+    },
+    "serverName": {
+      "@id": "lavu:server_name",
+      "@type": "xsd:string"
+    },
+    "action": {
+      "@id": "lavu:action",
+      "@type": "xsd:string"
+    },
+    "refData": {
+      "@id": "lavu:ref_data",
+      "@type": "xsd:string"
+    },
+    "processData": {
+      "@id": "lavu:process_data",
+      "@type": "xsd:string"
+    },
+    "voiceAuth": {
+      "@id": "lavu:voice_auth",
+      "@type": "xsd:string"
+    },
+    "preauthId": {
+      "@id": "lavu:preauth_id",
+      "@type": "xsd:string"
+    },
+    "tipForId": {
+      "@id": "lavu:tip_for_id",
+      "@type": "xsd:string"
+    },
+    "swipeGrade": {
+      "@id": "lavu:swipe_grade",
+      "@type": "xsd:string"
+    },
+    "batchNo": {
+      "@id": "lavu:batch_no",
+      "@type": "xsd:string"
+    },
+    "registerName": {
+      "@id": "lavu:register_name",
+      "@type": "xsd:string"
+    },
+    "payTypeId": {
+      "@id": "lavu:pay_type_id",
+      "@type": "xsd:string"
+    },
+    "firstFour": {
+      "@id": "lavu:first_four",
+      "@type": "xsd:string"
+    },
+    "mpshcPid": {
+      "@id": "lavu:mpshc_pid",
+      "@type": "xsd:string"
+    },
+    "serverTime": {
+      "@id": "lavu:server_time",
+      "@type": "xsd:string"
+    },
+    "info": {
+      "@id": "lavu:info",
+      "@type": "xsd:string"
+    },
+    "signature": {
+      "@id": "lavu:signature",
+      "@type": "xsd:string"
+    }
+  }
+}

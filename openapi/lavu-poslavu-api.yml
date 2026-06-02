@@ -1,0 +1,1184 @@
+openapi: 3.0.3
+info:
+  title: Lavu (POSLavu) API
+  description: >-
+    POST-based data API for the Lavu restaurant point-of-sale platform. A single
+    request endpoint accepts form-encoded credentials (dataname, key, token) plus
+    a `table` selector and returns XML `<row>` elements for the requested table.
+    The documented tables expose menu structure (menu_groups, menu_categories,
+    menu_items), floor layout (tables), and transactions (orders, order_contents,
+    order_payments) along with inventory data (ingredients, ingredient_usage).
+    Records can be written by adding `cmd=insert` and an XML `contents` payload.
+    Documentation is published at admin.poslavu.com and credentials are retrieved
+    from the API tab of the POSLavu Control Panel.
+  version: '1.0'
+  contact:
+    name: Kin Lane
+    email: kin@apievangelist.com
+  x-generated-from: documentation
+  x-source-url: https://admin.poslavu.com/cp/areas/api_doc.html
+  x-last-validated: '2026-06-02'
+servers:
+- url: https://admin.poslavu.com/cp/reqserv
+  description: Read endpoint (query tables)
+- url: https://admin.poslavu.com/v2/reqserv
+  description: Insert endpoint (write records)
+tags:
+- name: Menu
+  description: Menu groups, categories, and items.
+- name: Tables
+  description: Restaurant floor table layout.
+- name: Orders
+  description: Orders, order contents, and payments.
+- name: Inventory
+  description: Ingredients and ingredient usage.
+paths:
+  /:
+    post:
+      operationId: queryTable
+      summary: Lavu Query a POSLavu Table
+      description: >-
+        Retrieve rows from a POSLavu data table. Provide the `dataname`, `key`,
+        and `token` credentials from the API tab of the POSLavu Control Panel,
+        select the `table`, and optionally filter with `column`/`value` (exact
+        match) or `column`/`value_min`/`value_max` (range), and paginate with
+        `limit` (offset,count). Responses are returned as XML `<row>` elements.
+      tags:
+      - Menu
+      - Tables
+      - Orders
+      - Inventory
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/QueryRequest'
+            examples:
+              QueryTableRequestExample:
+                summary: Default queryTable request
+                x-microcks-default: true
+                value:
+                  dataname: MyRestaurant
+                  key: a1b2c3d4e5f6
+                  token: f6e5d4c3b2a1
+                  table: orders
+                  column: closed
+                  value_min: '2011-01-01 00:00:00'
+                  value_max: '2011-02-01 00:00:00'
+                  limit: 0,20
+      responses:
+        '200':
+          description: XML document containing zero or more `<row>` elements.
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RowList'
+              examples:
+                QueryTable200Example:
+                  summary: Default queryTable 200 response
+                  x-microcks-default: true
+                  value:
+                    row:
+                    - id: '1'
+                      order_id: '1'
+                      location: Dev West Side
+                      location_id: '9'
+                      opened: '2010-10-06 12:01:20'
+                      closed: '2011-01-26 17:16:31'
+                      subtotal: '40.50'
+                      taxrate: '0.06875'
+                      tax: '2.78'
+                      total: '43.28'
+                      server: Ancori Lifigi
+                      server_id: '5'
+                      tablename: Booth 7
+                      send_status: '1'
+                      discount: '0.00'
+                      discount_sh: ''
+                      gratuity: '0.00'
+                      gratuity_percent: '0.2250'
+                      card_gratuity: '0.00'
+                      cash_paid: '46.64'
+                      card_paid: '0.00'
+                      gift_certificate: '0.00'
+                      change_amount: '3.36'
+                      reopen_refund: '0.00'
+                      void: '1'
+                      cashier: Ancori Lifigi
+                      cashier_id: '5'
+                      auth_by: ''
+                      auth_by_id: '0'
+                      guests: '1'
+                      email: ''
+                      permission: '0'
+                      check_has_printed: '1'
+                      no_of_checks: '2'
+                      card_desc: ''
+                      transaction_id: ''
+                      multiple_tax_rates: '0'
+                      tab: '0'
+                      original_id: '0'
+                      deposit_status: '0'
+                      register: ''
+                      refunded: '0'
+                      refund_notes: ''
+                      refunded_cc: ''
+                      refund_notes_cc: ''
+                      refunded_by: '0'
+                      refunded_by_cc: '0'
+                      cash_tip: ''
+                      discount_value: ''
+                      reopened_datetime: ''
+                      discount_type: ''
+                      deposit_amount: ''
+                      subtotal_without_deposit: ''
+                      togo_status: ''
+                      togo_phone: ''
+                      togo_time: ''
+                      cash_applied: '43.28'
+                      rounding_amount: ''
+      security:
+      - posLavuCredentials: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /insert:
+    post:
+      operationId: insertRecords
+      summary: Lavu Insert Records Into a POSLavu Table
+      description: >-
+        Insert one or more records into a POSLavu data table. Send `cmd=insert`,
+        the target `table`, and a `contents` field containing one or more XML
+        `<row>` payloads. Writes target the v2 request server
+        (https://admin.poslavu.com/v2/reqserv). On success for an order insert,
+        the API returns a `<result>` element containing the new `<id>` and
+        `<order_id>`. Note this path is documented via the `cmd=insert` POST
+        variable rather than a distinct URL path; it is modeled here as a
+        separate operation for clarity.
+      tags:
+      - Orders
+      - Menu
+      - Inventory
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/InsertRequest'
+            examples:
+              InsertRecordsRequestExample:
+                summary: Default insertRecords request
+                x-microcks-default: true
+                value:
+                  dataname: MyRestaurant
+                  key: a1b2c3d4e5f6
+                  token: f6e5d4c3b2a1
+                  cmd: insert
+                  table: orders
+                  contents: <row><opened>2011-09-06 16:10:00</opened><subtotal>14.25</subtotal><total>15.23</total><server>Ancori</server><guests>2</guests></row>
+      responses:
+        '200':
+          description: XML `<result>` element with the new record id and order id.
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/InsertResult'
+              examples:
+                InsertRecords200Example:
+                  summary: Default insertRecords 200 response
+                  x-microcks-default: true
+                  value:
+                    id: '42'
+                    order_id: '42'
+      security:
+      - posLavuCredentials: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    posLavuCredentials:
+      type: apiKey
+      in: query
+      name: token
+      description: >-
+        POSLavu requests are authenticated with three form-encoded credentials
+        (`dataname`, `key`, `token`) issued in the API tab of the POSLavu Control
+        Panel. OpenAPI cannot express a multi-field credential as a single scheme;
+        the `token` field is declared here as the representative credential and
+        all three are required on every request.
+  schemas:
+    QueryRequest:
+      type: object
+      description: Form-encoded fields for a table query request.
+      required:
+      - dataname
+      - key
+      - token
+      - table
+      properties:
+        dataname:
+          type: string
+          description: Account data name from the API tab of the POSLavu Control Panel.
+          example: MyRestaurant
+        key:
+          type: string
+          description: API key from the API tab of the POSLavu Control Panel.
+          example: a1b2c3d4e5f6
+        token:
+          type: string
+          description: API token from the API tab of the POSLavu Control Panel.
+          example: f6e5d4c3b2a1
+        table:
+          type: string
+          description: The data table to query.
+          enum:
+          - menu_groups
+          - menu_categories
+          - menu_items
+          - tables
+          - orders
+          - order_contents
+          - order_payments
+          - ingredients
+          - ingredient_usage
+          example: orders
+        column:
+          type: string
+          description: Column name to filter on.
+          example: closed
+        value:
+          type: string
+          description: Exact value to match for the filter column.
+          example: '1'
+        value_min:
+          type: string
+          description: Inclusive lower bound for a range filter on the filter column.
+          example: '2011-01-01 00:00:00'
+        value_max:
+          type: string
+          description: Inclusive upper bound for a range filter on the filter column.
+          example: '2011-02-01 00:00:00'
+        limit:
+          type: string
+          description: Pagination control in `offset,count` format (e.g. `0,20`).
+          example: 0,20
+    InsertRequest:
+      type: object
+      description: Form-encoded fields for a record insert request.
+      required:
+      - dataname
+      - key
+      - token
+      - cmd
+      - table
+      - contents
+      properties:
+        dataname:
+          type: string
+          description: Account data name from the API tab of the POSLavu Control Panel.
+          example: MyRestaurant
+        key:
+          type: string
+          description: API key from the API tab of the POSLavu Control Panel.
+          example: a1b2c3d4e5f6
+        token:
+          type: string
+          description: API token from the API tab of the POSLavu Control Panel.
+          example: f6e5d4c3b2a1
+        cmd:
+          type: string
+          description: Command selector; must be `insert` for write operations.
+          enum:
+          - insert
+          example: insert
+        table:
+          type: string
+          description: The data table to insert into.
+          enum:
+          - orders
+          - order_contents
+          - order_payments
+          - menu_items
+          - ingredients
+          example: orders
+        contents:
+          type: string
+          description: >-
+            One or more XML `<row>` payloads representing the records to insert.
+          example: <row><opened>2011-09-06 16:10:00</opened><total>15.23</total></row>
+    RowList:
+      type: object
+      description: A list of table rows returned by a query.
+      properties:
+        row:
+          type: array
+          description: The returned rows. Each row's fields depend on the queried table.
+          items:
+            type: object
+            additionalProperties: true
+    InsertResult:
+      type: object
+      description: Result of an insert operation.
+      properties:
+        id:
+          type: string
+          description: Identifier of the newly created entry.
+          example: '42'
+        order_id:
+          type: string
+          description: Order identifier assigned to a newly created order.
+          example: '42'
+    MenuGroup:
+      type: object
+      description: A menu group (e.g. Dinner) from the menu_groups table.
+      properties:
+        id:
+          type: string
+          description: Menu group identifier.
+          example: '8'
+        menu_id:
+          type: string
+          description: Identifier of the menu this group belongs to.
+          example: '11'
+        group_name:
+          type: string
+          description: Display name of the menu group.
+          example: Dinner
+        orderby:
+          type: string
+          description: Sort ordering value.
+          example: ''
+    MenuCategory:
+      type: object
+      description: A menu category from the menu_categories table.
+      properties:
+        id:
+          type: string
+          description: Menu category identifier.
+          example: '113'
+        menu_id:
+          type: string
+          description: Identifier of the menu this category belongs to.
+          example: '11'
+        group_id:
+          type: string
+          description: Identifier of the parent menu group.
+          example: '2'
+        name:
+          type: string
+          description: Category name.
+          example: Zambos
+        image:
+          type: string
+          description: Category image filename.
+          example: ''
+        description:
+          type: string
+          description: Category description.
+          example: ''
+        active:
+          type: string
+          description: Whether the category is active (1) or not (0).
+          example: '1'
+        print:
+          type: string
+          description: Whether items print by default (1) or not (0).
+          example: '0'
+        last_modified_date:
+          type: string
+          description: Last modification timestamp.
+          example: '0000-00-00 00:00:00'
+        printer:
+          type: string
+          description: Assigned printer identifier.
+          example: '1'
+        modifier_list_id:
+          type: string
+          description: Associated modifier list identifier.
+          example: '0'
+        apply_taxrate:
+          type: string
+          description: Tax rate application mode (e.g. Default).
+          example: Default
+        custom_taxrate:
+          type: string
+          description: Custom tax rate when not using the default.
+          example: ''
+        forced_modifier_group_id:
+          type: string
+          description: Forced modifier group identifier.
+          example: '0'
+        print_order:
+          type: string
+          description: Print ordering value.
+          example: '0'
+        super_group_id:
+          type: string
+          description: Parent super group identifier.
+          example: '1'
+    MenuItem:
+      type: object
+      description: A menu item from the menu_items table.
+      properties:
+        id:
+          type: string
+          description: Menu item identifier.
+          example: '813'
+        category_id:
+          type: string
+          description: Identifier of the parent menu category.
+          example: '113'
+        menu_id:
+          type: string
+          description: Identifier of the menu this item belongs to.
+          example: '11'
+        name:
+          type: string
+          description: Item name.
+          example: Grox
+        price:
+          type: string
+          description: Item price.
+          example: '25'
+        description:
+          type: string
+          description: Item description.
+          example: ''
+        image:
+          type: string
+          description: Primary item image filename.
+          example: ann_smith_robot_dino.jpg
+        image2:
+          type: string
+          description: Secondary item image filename.
+          example: ''
+        image3:
+          type: string
+          description: Tertiary item image filename.
+          example: ''
+        misc_content:
+          type: string
+          description: Miscellaneous content.
+          example: ''
+        options1:
+          type: string
+          description: Option set one.
+          example: ''
+        options2:
+          type: string
+          description: Option set two.
+          example: ''
+        options3:
+          type: string
+          description: Option set three.
+          example: ''
+        active:
+          type: string
+          description: Whether the item is active (1) or not (0).
+          example: '1'
+        print:
+          type: string
+          description: Whether the item prints (1) or not (0).
+          example: '1'
+        quick_item:
+          type: string
+          description: Whether the item is a quick item (1) or not (0).
+          example: '0'
+        last_modified_date:
+          type: string
+          description: Last modification timestamp.
+          example: '0000-00-00 00:00:00'
+        printer:
+          type: string
+          description: Assigned printer identifier.
+          example: '0'
+        apply_taxrate:
+          type: string
+          description: Tax rate application mode (e.g. Default).
+          example: Default
+        custom_taxrate:
+          type: string
+          description: Custom tax rate when not using the default.
+          example: ''
+        modifier_list_id:
+          type: string
+          description: Associated modifier list identifier.
+          example: '0'
+        forced_modifier_group_id:
+          type: string
+          description: Forced modifier group identifier.
+          example: C
+        ingredients:
+          type: string
+          description: Associated ingredients.
+          example: ''
+        open_item:
+          type: string
+          description: Whether the item is an open item (1) or not (0).
+          example: '0'
+        hidden_value:
+          type: string
+          description: Hidden value field one.
+          example: ''
+        hidden_value2:
+          type: string
+          description: Hidden value field two.
+          example: ''
+        allow_deposit:
+          type: string
+          description: Whether deposits are allowed (1) or not (0).
+          example: '0'
+        UPC:
+          type: string
+          description: Universal Product Code.
+          example: ''
+        hidden_value3:
+          type: string
+          description: Hidden value field three.
+          example: ''
+        inv_count:
+          type: string
+          description: Inventory count.
+          example: '0'
+        show_in_app:
+          type: string
+          description: Whether the item shows in the app (1) or not (0).
+          example: '1'
+        super_group_id:
+          type: string
+          description: Parent super group identifier.
+          example: ''
+    Table:
+      type: object
+      description: A floor layout table from the tables table.
+      properties:
+        id:
+          type: string
+          description: Table layout identifier.
+          example: '3'
+        loc_id:
+          type: string
+          description: Location identifier.
+          example: '9'
+        coord_x:
+          type: string
+          description: Pipe-delimited X coordinates of each table on the floor layout.
+          example: 138|258|372
+        coord_y:
+          type: string
+          description: Pipe-delimited Y coordinates of each table on the floor layout.
+          example: 82|82|82
+        shapes:
+          type: string
+          description: Pipe-delimited shape of each table (e.g. square, circle).
+          example: square|square|circle
+        widths:
+          type: string
+          description: Pipe-delimited widths of each table.
+          example: 74|70|70
+        heights:
+          type: string
+          description: Pipe-delimited heights of each table.
+          example: 69|70|70
+        names:
+          type: string
+          description: Pipe-delimited display names of each table (e.g. Booth 1, Table 5).
+          example: Booth 1|Booth 2|Table 1
+    Order:
+      type: object
+      description: An order from the orders table.
+      properties:
+        id:
+          type: string
+          description: Row identifier.
+          example: '1'
+        order_id:
+          type: string
+          description: Order identifier.
+          example: '1'
+        location:
+          type: string
+          description: Location name.
+          example: Dev West Side
+        location_id:
+          type: string
+          description: Location identifier.
+          example: '9'
+        opened:
+          type: string
+          description: Timestamp the order was opened.
+          example: '2010-10-06 12:01:20'
+        closed:
+          type: string
+          description: Timestamp the order was closed.
+          example: '2011-01-26 17:16:31'
+        subtotal:
+          type: string
+          description: Order subtotal.
+          example: '40.50'
+        taxrate:
+          type: string
+          description: Applied tax rate.
+          example: '0.06875'
+        tax:
+          type: string
+          description: Tax amount.
+          example: '2.78'
+        total:
+          type: string
+          description: Order total.
+          example: '43.28'
+        server:
+          type: string
+          description: Server name.
+          example: Ancori Lifigi
+        server_id:
+          type: string
+          description: Server identifier.
+          example: '5'
+        tablename:
+          type: string
+          description: Name of the table the order was placed at.
+          example: Booth 7
+        send_status:
+          type: string
+          description: Send status flag.
+          example: '1'
+        discount:
+          type: string
+          description: Discount amount.
+          example: '0.00'
+        discount_sh:
+          type: string
+          description: Discount shorthand.
+          example: ''
+        gratuity:
+          type: string
+          description: Gratuity amount.
+          example: '0.00'
+        gratuity_percent:
+          type: string
+          description: Gratuity percentage.
+          example: '0.2250'
+        card_gratuity:
+          type: string
+          description: Card gratuity amount.
+          example: '0.00'
+        cash_paid:
+          type: string
+          description: Cash paid.
+          example: '46.64'
+        card_paid:
+          type: string
+          description: Card paid.
+          example: '0.00'
+        gift_certificate:
+          type: string
+          description: Gift certificate amount applied.
+          example: '0.00'
+        change_amount:
+          type: string
+          description: Change returned.
+          example: '3.36'
+        reopen_refund:
+          type: string
+          description: Refund amount on reopen.
+          example: '0.00'
+        void:
+          type: string
+          description: Whether the order is voided (1) or not (0).
+          example: '1'
+        cashier:
+          type: string
+          description: Cashier name.
+          example: Ancori Lifigi
+        cashier_id:
+          type: string
+          description: Cashier identifier.
+          example: '5'
+        auth_by:
+          type: string
+          description: Name of the authorizing employee.
+          example: ''
+        auth_by_id:
+          type: string
+          description: Identifier of the authorizing employee.
+          example: '0'
+        guests:
+          type: string
+          description: Guest count.
+          example: '1'
+        email:
+          type: string
+          description: Customer email.
+          example: ''
+        permission:
+          type: string
+          description: Permission flag.
+          example: '0'
+        check_has_printed:
+          type: string
+          description: Whether the check has printed (1) or not (0).
+          example: '1'
+        no_of_checks:
+          type: string
+          description: Number of checks.
+          example: '2'
+        card_desc:
+          type: string
+          description: Card description.
+          example: ''
+        transaction_id:
+          type: string
+          description: Payment transaction identifier.
+          example: ''
+        multiple_tax_rates:
+          type: string
+          description: Whether multiple tax rates apply (1) or not (0).
+          example: '0'
+        tab:
+          type: string
+          description: Whether the order is a tab (1) or not (0).
+          example: '0'
+        original_id:
+          type: string
+          description: Original order identifier.
+          example: '0'
+        deposit_status:
+          type: string
+          description: Deposit status.
+          example: '0'
+        register:
+          type: string
+          description: Register name.
+          example: ''
+        refunded:
+          type: string
+          description: Whether refunded (1) or not (0).
+          example: '0'
+        refund_notes:
+          type: string
+          description: Refund notes.
+          example: ''
+        refunded_cc:
+          type: string
+          description: Whether refunded to card (1) or not (0).
+          example: ''
+        refund_notes_cc:
+          type: string
+          description: Card refund notes.
+          example: ''
+        refunded_by:
+          type: string
+          description: Identifier of the employee who refunded.
+          example: '0'
+        refunded_by_cc:
+          type: string
+          description: Identifier of the employee who refunded to card.
+          example: '0'
+        cash_tip:
+          type: string
+          description: Cash tip amount.
+          example: ''
+        discount_value:
+          type: string
+          description: Discount value.
+          example: ''
+        reopened_datetime:
+          type: string
+          description: Timestamp the order was reopened.
+          example: ''
+        discount_type:
+          type: string
+          description: Discount type.
+          example: ''
+        deposit_amount:
+          type: string
+          description: Deposit amount.
+          example: ''
+        subtotal_without_deposit:
+          type: string
+          description: Subtotal excluding deposit.
+          example: ''
+        togo_status:
+          type: string
+          description: To-go status.
+          example: ''
+        togo_phone:
+          type: string
+          description: To-go phone number.
+          example: ''
+        togo_time:
+          type: string
+          description: To-go time.
+          example: ''
+        cash_applied:
+          type: string
+          description: Cash applied to the order.
+          example: '43.28'
+        rounding_amount:
+          type: string
+          description: Rounding adjustment amount.
+          example: ''
+    OrderContent:
+      type: object
+      description: A line item from the order_contents table.
+      properties:
+        id:
+          type: string
+          description: Row identifier.
+          example: '1'
+        loc_id:
+          type: string
+          description: Location identifier.
+          example: '9'
+        order_id:
+          type: string
+          description: Identifier of the parent order.
+          example: '1'
+        item:
+          type: string
+          description: Item name.
+          example: Dynamite
+        price:
+          type: string
+          description: Item price.
+          example: '15'
+        quantity:
+          type: string
+          description: Quantity ordered.
+          example: '1'
+        options:
+          type: string
+          description: Selected options/modifiers.
+          example: Shark - Bacon - Cheese
+        special:
+          type: string
+          description: Special instructions.
+          example: ''
+        modify_price:
+          type: string
+          description: Modified price.
+          example: ''
+        print:
+          type: string
+          description: Whether the line prints (1) or not (0).
+          example: '1'
+        check:
+          type: string
+          description: Check number.
+          example: '1'
+        seat:
+          type: string
+          description: Seat number.
+          example: '1'
+        item_id:
+          type: string
+          description: Menu item identifier.
+          example: '120'
+        printer:
+          type: string
+          description: Assigned printer identifier.
+          example: '1'
+        apply_taxrate:
+          type: string
+          description: Applied tax rate.
+          example: '0.06875'
+        custom_taxrate:
+          type: string
+          description: Custom tax rate.
+          example: '0.06875'
+        modifier_list_id:
+          type: string
+          description: Associated modifier list identifier.
+          example: '0'
+        forced_modifier_group_id:
+          type: string
+          description: Forced modifier group identifier.
+          example: '0'
+        forced_modifiers_price:
+          type: string
+          description: Price of forced modifiers.
+          example: '5.25'
+        course:
+          type: string
+          description: Course number.
+          example: '1'
+        print_order:
+          type: string
+          description: Print ordering value.
+          example: '0'
+        open_item:
+          type: string
+          description: Whether the line is an open item (1) or not (0).
+          example: '0'
+        subtotal:
+          type: string
+          description: Line subtotal.
+          example: ''
+        allow_deposit:
+          type: string
+          description: Whether deposits are allowed (1) or not (0).
+          example: '0'
+        deposit_info:
+          type: string
+          description: Deposit information.
+          example: ''
+        discount_amount:
+          type: string
+          description: Discount amount.
+          example: ''
+        discount_value:
+          type: string
+          description: Discount value.
+          example: ''
+        discount_type:
+          type: string
+          description: Discount type.
+          example: ''
+        after_discount:
+          type: string
+          description: Amount after discount.
+          example: ''
+        subtotal_with_mods:
+          type: string
+          description: Subtotal including modifiers.
+          example: ''
+        tax_amount:
+          type: string
+          description: Tax amount.
+          example: ''
+        notes:
+          type: string
+          description: Line notes.
+          example: ''
+        total_with_tax:
+          type: string
+          description: Total including tax.
+          example: ''
+        itax_rate:
+          type: string
+          description: Inclusive tax rate.
+          example: ''
+        itax:
+          type: string
+          description: Inclusive tax amount.
+          example: ''
+        tax_rate1:
+          type: string
+          description: Tax rate one.
+          example: ''
+        tax1:
+          type: string
+          description: Tax amount one.
+          example: ''
+        tax_rate2:
+          type: string
+          description: Tax rate two.
+          example: ''
+        tax2:
+          type: string
+          description: Tax amount two.
+          example: ''
+        tax_rate3:
+          type: string
+          description: Tax rate three.
+          example: ''
+        tax3:
+          type: string
+          description: Tax amount three.
+          example: ''
+    OrderPayment:
+      type: object
+      description: A payment record from the order_payments table.
+      properties:
+        id:
+          type: string
+          description: Payment row identifier.
+          example: '1239'
+        order_id:
+          type: string
+          description: Identifier of the parent order (may include a check suffix, e.g. 1-2).
+          example: 1-2
+        check:
+          type: string
+          description: Check number.
+          example: '1'
+        amount:
+          type: string
+          description: Payment amount.
+          example: '5.50'
+        card_desc:
+          type: string
+          description: Card description.
+          example: ''
+        transaction_id:
+          type: string
+          description: Payment transaction identifier.
+          example: ''
+        refunded:
+          type: string
+          description: Whether refunded (1) or not (0).
+          example: '0'
+        refund_notes:
+          type: string
+          description: Refund notes.
+          example: ''
+        refunded_by:
+          type: string
+          description: Identifier of the employee who refunded.
+          example: '0'
+        refund_pnref:
+          type: string
+          description: Refund processor reference.
+          example: ''
+        tip_amount:
+          type: string
+          description: Tip amount.
+          example: ''
+        auth:
+          type: string
+          description: Authorization flag.
+          example: '0'
+        loc_id:
+          type: string
+          description: Location identifier.
+          example: '9'
+        processed:
+          type: string
+          description: Whether processed (1) or not (0).
+          example: '0'
+        auth_code:
+          type: string
+          description: Authorization code.
+          example: ''
+        card_type:
+          type: string
+          description: Card type.
+          example: ''
+        datetime:
+          type: string
+          description: Payment timestamp.
+          example: '2011-10-10 11:50:38'
+        pay_type:
+          type: string
+          description: Payment type (e.g. Cash).
+          example: Cash
+        voided:
+          type: string
+          description: Whether voided (1) or not (0).
+          example: '0'
+        void_notes:
+          type: string
+          description: Void notes.
+          example: ''
+        voided_by:
+          type: string
+          description: Identifier of the employee who voided.
+          example: '0'
+        void_pnref:
+          type: string
+          description: Void processor reference.
+          example: ''
+        register:
+          type: string
+          description: Register name.
+          example: receipt
+        got_response:
+          type: string
+          description: Whether a processor response was received (1) or not (0).
+          example: '0'
+        transtype:
+          type: string
+          description: Transaction type.
+          example: ''
+        split_tender_id:
+          type: string
+          description: Split tender identifier.
+          example: ''
+        temp_data:
+          type: string
+          description: Temporary data.
+          example: ''
+        change:
+          type: string
+          description: Change returned.
+          example: ''
+        total_collected:
+          type: string
+          description: Total amount collected.
+          example: '5.50'
+        record_no:
+          type: string
+          description: Record number.
+          example: ''
+        server_name:
+          type: string
+          description: Server name.
+          example: Ancori
+        action:
+          type: string
+          description: Payment action (e.g. Sale).
+          example: Sale
+        ref_data:
+          type: string
+          description: Reference data.
+          example: ''
+        process_data:
+          type: string
+          description: Processing data.
+          example: ''
+        voice_auth:
+          type: string
+          description: Whether voice authorized (1) or not (0).
+          example: '0'
+        server_id:
+          type: string
+          description: Server identifier.
+          example: '15'
+        preauth_id:
+          type: string
+          description: Pre-authorization identifier.
+          example: ''
+        tip_for_id:
+          type: string
+          description: Identifier the tip applies to.
+          example: '0'
+        swipe_grade:
+          type: string
+          description: Card swipe grade.
+          example: ''
+        batch_no:
+          type: string
+          description: Batch number.
+          example: ''
+        register_name:
+          type: string
+          description: Register name.
+          example: receipt
+        pay_type_id:
+          type: string
+          description: Payment type identifier.
+          example: '1'
+        first_four:
+          type: string
+          description: First four digits of the card.
+          example: ''
+        mpshc_pid:
+          type: string
+          description: Processor product identifier.
+          example: ''
+        server_time:
+          type: string
+          description: Server-side timestamp.
+          example: '2011-10-10 12:49:26'
+        info:
+          type: string
+          description: Additional information.
+          example: ''
+        signature:
+          type: string
+          description: Whether a signature was captured (1) or not (0).
+          example: '0'

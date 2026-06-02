@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Table",
+  "description": "A floor layout table from the tables table.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/lavu/refs/heads/main/json-schema/poslavu-api-table-schema.json",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Table layout identifier.",
+      "example": "3"
+    },
+    "loc_id": {
+      "type": "string",
+      "description": "Location identifier.",
+      "example": "9"
+    },
+    "coord_x": {
+      "type": "string",
+      "description": "Pipe-delimited X coordinates of each table on the floor layout.",
+      "example": "138|258|372"
+    },
+    "coord_y": {
+      "type": "string",
+      "description": "Pipe-delimited Y coordinates of each table on the floor layout.",
+      "example": "82|82|82"
+    },
+    "shapes": {
+      "type": "string",
+      "description": "Pipe-delimited shape of each table (e.g. square, circle).",
+      "example": "square|square|circle"
+    },
+    "widths": {
+      "type": "string",
+      "description": "Pipe-delimited widths of each table.",
+      "example": "74|70|70"
+    },
+    "heights": {
+      "type": "string",
+      "description": "Pipe-delimited heights of each table.",
+      "example": "69|70|70"
+    },
+    "names": {
+      "type": "string",
+      "description": "Pipe-delimited display names of each table (e.g. Booth 1, Table 5).",
+      "example": "Booth 1|Booth 2|Table 1"
+    }
+  }
+}

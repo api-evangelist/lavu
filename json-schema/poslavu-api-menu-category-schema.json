@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MenuCategory",
+  "description": "A menu category from the menu_categories table.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/lavu/refs/heads/main/json-schema/poslavu-api-menu-category-schema.json",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Menu category identifier.",
+      "example": "113"
+    },
+    "menu_id": {
+      "type": "string",
+      "description": "Identifier of the menu this category belongs to.",
+      "example": "11"
+    },
+    "group_id": {
+      "type": "string",
+      "description": "Identifier of the parent menu group.",
+      "example": "2"
+    },
+    "name": {
+      "type": "string",
+      "description": "Category name.",
+      "example": "Zambos"
+    },
+    "image": {
+      "type": "string",
+      "description": "Category image filename.",
+      "example": ""
+    },
+    "description": {
+      "type": "string",
+      "description": "Category description.",
+      "example": ""
+    },
+    "active": {
+      "type": "string",
+      "description": "Whether the category is active (1) or not (0).",
+      "example": "1"
+    },
+    "print": {
+      "type": "string",
+      "description": "Whether items print by default (1) or not (0).",
+      "example": "0"
+    },
+    "last_modified_date": {
+      "type": "string",
+      "description": "Last modification timestamp.",
+      "example": "0000-00-00 00:00:00"
+    },
+    "printer": {
+      "type": "string",
+      "description": "Assigned printer identifier.",
+      "example": "1"
+    },
+    "modifier_list_id": {
+      "type": "string",
+      "description": "Associated modifier list identifier.",
+      "example": "0"
+    },
+    "apply_taxrate": {
+      "type": "string",
+      "description": "Tax rate application mode (e.g. Default).",
+      "example": "Default"
+    },
+    "custom_taxrate": {
+      "type": "string",
+      "description": "Custom tax rate when not using the default.",
+      "example": ""
+    },
+    "forced_modifier_group_id": {
+      "type": "string",
+      "description": "Forced modifier group identifier.",
+      "example": "0"
+    },
+    "print_order": {
+      "type": "string",
+      "description": "Print ordering value.",
+      "example": "0"
+    },
+    "super_group_id": {
+      "type": "string",
+      "description": "Parent super group identifier.",
+      "example": "1"
+    }
+  }
+}

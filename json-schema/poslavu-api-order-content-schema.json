@@ -1,0 +1,214 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "OrderContent",
+  "description": "A line item from the order_contents table.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/lavu/refs/heads/main/json-schema/poslavu-api-order-content-schema.json",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Row identifier.",
+      "example": "1"
+    },
+    "loc_id": {
+      "type": "string",
+      "description": "Location identifier.",
+      "example": "9"
+    },
+    "order_id": {
+      "type": "string",
+      "description": "Identifier of the parent order.",
+      "example": "1"
+    },
+    "item": {
+      "type": "string",
+      "description": "Item name.",
+      "example": "Dynamite"
+    },
+    "price": {
+      "type": "string",
+      "description": "Item price.",
+      "example": "15"
+    },
+    "quantity": {
+      "type": "string",
+      "description": "Quantity ordered.",
+      "example": "1"
+    },
+    "options": {
+      "type": "string",
+      "description": "Selected options/modifiers.",
+      "example": "Shark - Bacon - Cheese"
+    },
+    "special": {
+      "type": "string",
+      "description": "Special instructions.",
+      "example": ""
+    },
+    "modify_price": {
+      "type": "string",
+      "description": "Modified price.",
+      "example": ""
+    },
+    "print": {
+      "type": "string",
+      "description": "Whether the line prints (1) or not (0).",
+      "example": "1"
+    },
+    "check": {
+      "type": "string",
+      "description": "Check number.",
+      "example": "1"
+    },
+    "seat": {
+      "type": "string",
+      "description": "Seat number.",
+      "example": "1"
+    },
+    "item_id": {
+      "type": "string",
+      "description": "Menu item identifier.",
+      "example": "120"
+    },
+    "printer": {
+      "type": "string",
+      "description": "Assigned printer identifier.",
+      "example": "1"
+    },
+    "apply_taxrate": {
+      "type": "string",
+      "description": "Applied tax rate.",
+      "example": "0.06875"
+    },
+    "custom_taxrate": {
+      "type": "string",
+      "description": "Custom tax rate.",
+      "example": "0.06875"
+    },
+    "modifier_list_id": {
+      "type": "string",
+      "description": "Associated modifier list identifier.",
+      "example": "0"
+    },
+    "forced_modifier_group_id": {
+      "type": "string",
+      "description": "Forced modifier group identifier.",
+      "example": "0"
+    },
+    "forced_modifiers_price": {
+      "type": "string",
+      "description": "Price of forced modifiers.",
+      "example": "5.25"
+    },
+    "course": {
+      "type": "string",
+      "description": "Course number.",
+      "example": "1"
+    },
+    "print_order": {
+      "type": "string",
+      "description": "Print ordering value.",
+      "example": "0"
+    },
+    "open_item": {
+      "type": "string",
+      "description": "Whether the line is an open item (1) or not (0).",
+      "example": "0"
+    },
+    "subtotal": {
+      "type": "string",
+      "description": "Line subtotal.",
+      "example": ""
+    },
+    "allow_deposit": {
+      "type": "string",
+      "description": "Whether deposits are allowed (1) or not (0).",
+      "example": "0"
+    },
+    "deposit_info": {
+      "type": "string",
+      "description": "Deposit information.",
+      "example": ""
+    },
+    "discount_amount": {
+      "type": "string",
+      "description": "Discount amount.",
+      "example": ""
+    },
+    "discount_value": {
+      "type": "string",
+      "description": "Discount value.",
+      "example": ""
+    },
+    "discount_type": {
+      "type": "string",
+      "description": "Discount type.",
+      "example": ""
+    },
+    "after_discount": {
+      "type": "string",
+      "description": "Amount after discount.",
+      "example": ""
+    },
+    "subtotal_with_mods": {
+      "type": "string",
+      "description": "Subtotal including modifiers.",
+      "example": ""
+    },
+    "tax_amount": {
+      "type": "string",
+      "description": "Tax amount.",
+      "example": ""
+    },
+    "notes": {
+      "type": "string",
+      "description": "Line notes.",
+      "example": ""
+    },
+    "total_with_tax": {
+      "type": "string",
+      "description": "Total including tax.",
+      "example": ""
+    },
+    "itax_rate": {
+      "type": "string",
+      "description": "Inclusive tax rate.",
+      "example": ""
+    },
+    "itax": {
+      "type": "string",
+      "description": "Inclusive tax amount.",
+      "example": ""
+    },
+    "tax_rate1": {
+      "type": "string",
+      "description": "Tax rate one.",
+      "example": ""
+    },
+    "tax1": {
+      "type": "string",
+      "description": "Tax amount one.",
+      "example": ""
+    },
+    "tax_rate2": {
+      "type": "string",
+      "description": "Tax rate two.",
+      "example": ""
+    },
+    "tax2": {
+      "type": "string",
+      "description": "Tax amount two.",
+      "example": ""
+    },
+    "tax_rate3": {
+      "type": "string",
+      "description": "Tax rate three.",
+      "example": ""
+    },
+    "tax3": {
+      "type": "string",
+      "description": "Tax amount three.",
+      "example": ""
+    }
+  }
+}

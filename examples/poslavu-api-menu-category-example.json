@@ -1,0 +1,18 @@
+{
+  "id": "113",
+  "menu_id": "11",
+  "group_id": "2",
+  "name": "Zambos",
+  "image": "",
+  "description": "",
+  "active": "1",
+  "print": "0",
+  "last_modified_date": "0000-00-00 00:00:00",
+  "printer": "1",
+  "modifier_list_id": "0",
+  "apply_taxrate": "Default",
+  "custom_taxrate": "",
+  "forced_modifier_group_id": "0",
+  "print_order": "0",
+  "super_group_id": "1"
+}

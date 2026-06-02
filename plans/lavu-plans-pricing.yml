@@ -1,0 +1,106 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Lavu
+providerId: lavu
+created: '2026-06-02'
+modified: '2026-06-02'
+reconciled: false
+tags:
+  - Restaurant
+  - Point of Sale
+  - Payments
+  - Subscription
+description: >-
+  Lavu prices its restaurant POS as a tiered monthly software subscription
+  charged per terminal (billed annually), layered with payment processing fees
+  and optional add-on modules (online ordering, delivery integration, kitchen
+  display). Published tier names and prices vary by source and promotion; Lavu
+  also runs dual-pricing/cash-discount programs to offset card fees. The POSLavu
+  API itself is not separately metered — API access is included with an active
+  Lavu account. Final pricing is negotiated with Lavu sales, so figures here are
+  reconciled: false and should be confirmed against the live pricing page.
+sources:
+  - https://lavu.com/pricing/
+  - https://www.g2.com/products/lavu/pricing
+  - https://www.capterra.com/p/118828/Lavu/pricing/
+plans:
+  - id: lavu-starter
+    name: Starter
+    type: subscription
+    description: Single-terminal core POS subscription.
+    entries:
+      - label: Per-terminal software subscription
+        name: terminal_subscription
+        type: subscription
+        metric: seat
+        limit: 1
+        timeFrame: month
+        geo: US
+        unit: '1'
+        price: '$59/month (billed annually)'
+        userMultiplied: true
+    elements:
+      - name: Core iPad POS
+      - name: Menu management
+      - name: Order management
+      - name: Basic reporting
+      - name: POSLavu API access
+  - id: lavu-growth
+    name: Growth
+    type: subscription
+    description: Multi-terminal POS with online ordering and advanced reporting.
+    entries:
+      - label: Per-terminal software subscription
+        name: terminal_subscription
+        type: subscription
+        metric: seat
+        limit: -1
+        timeFrame: month
+        geo: US
+        unit: '1'
+        price: '$129/month (billed annually)'
+        userMultiplied: true
+    elements:
+      - name: Everything in Starter
+      - name: Online ordering
+      - name: Advanced reporting
+      - name: Inventory management
+  - id: lavu-optimize
+    name: Optimize
+    type: subscription
+    description: Full-feature POS for larger and multi-location operations.
+    entries:
+      - label: Per-terminal software subscription
+        name: terminal_subscription
+        type: subscription
+        metric: seat
+        limit: -1
+        timeFrame: month
+        geo: US
+        unit: '1'
+        price: '$279/month (billed annually)'
+        userMultiplied: true
+    elements:
+      - name: Everything in Growth
+      - name: Multi-location management
+      - name: AI-powered intelligence and analytics
+      - name: Priority support
+  - id: lavu-payments
+    name: Payment Processing
+    type: usage-based
+    description: >-
+      Integrated card payment processing layered on any POS subscription. Lavu
+      offers dual-pricing / cash-discount options to offset card fees; exact
+      processing rates are quoted per merchant.
+    entries:
+      - label: Card transaction processing
+        name: card_processing
+        type: metered
+        metric: transaction
+        limit: -1
+        timeFrame: usage
+        geo: US
+        unit: '1'
+        price: 'see lavu.com/pricing (merchant-quoted; dual-pricing available)'
+        userMultiplied: false

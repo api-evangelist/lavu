@@ -1,0 +1,258 @@
+# Spectral ruleset for the Lavu (POSLavu) API
+# Enforces the conventions observed across the api-evangelist/lavu OpenAPI specs:
+# POST-based table query interface, snake_case schema properties, form-urlencoded
+# request bodies, XML responses, Title Case tags, and "Lavu " summary prefix.
+rules:
+
+  # ── INFO / METADATA ───────────────────────────────────────────────
+  info-title-required:
+    description: The API must declare a title.
+    severity: error
+    given: $.info
+    then:
+      field: title
+      function: truthy
+  info-title-lavu-prefix:
+    description: The API title should reference Lavu.
+    severity: warn
+    given: $.info.title
+    then:
+      function: pattern
+      functionOptions:
+        match: "Lavu"
+  info-description-required:
+    description: The API must have a meaningful description (min 40 chars).
+    severity: warn
+    given: $.info
+    then:
+      field: description
+      function: length
+      functionOptions:
+        min: 40
+  info-version-required:
+    description: The API must declare a version.
+    severity: error
+    given: $.info
+    then:
+      field: version
+      function: truthy
+  info-contact-required:
+    description: The API should declare a contact.
+    severity: warn
+    given: $.info
+    then:
+      field: contact
+      function: truthy
+
+  # ── OPENAPI VERSION ───────────────────────────────────────────────
+  openapi-version-3:
+    description: Specs must use OpenAPI 3.0.x.
+    severity: warn
+    given: $.openapi
+    then:
+      function: pattern
+      functionOptions:
+        match: "^3\\.0\\.\\d+$"
+
+  # ── SERVERS ───────────────────────────────────────────────────────
+  servers-defined:
+    description: At least one server must be defined.
+    severity: error
+    given: $
+    then:
+      field: servers
+      function: truthy
+  servers-https:
+    description: Server URLs must use HTTPS (POSLavu request servers are HTTPS).
+    severity: warn
+    given: $.servers[*].url
+    then:
+      function: pattern
+      functionOptions:
+        match: "^https://"
+  servers-description:
+    description: Each server should be described.
+    severity: info
+    given: $.servers[*]
+    then:
+      field: description
+      function: truthy
+
+  # ── OPERATIONS ────────────────────────────────────────────────────
+  operation-operationid-required:
+    description: Every operation must declare an operationId.
+    severity: error
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: operationId
+      function: truthy
+  operation-operationid-camel-case:
+    description: operationId must be camelCase (e.g. queryTable, insertRecords).
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].operationId
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-zA-Z0-9]*$"
+  operation-summary-required:
+    description: Every operation must have a summary.
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: summary
+      function: truthy
+  operation-summary-lavu-prefix:
+    description: Operation summaries must begin with the provider name "Lavu".
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].summary
+    then:
+      function: pattern
+      functionOptions:
+        match: "^Lavu "
+  operation-description-required:
+    description: Every operation must have a description.
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: description
+      function: truthy
+  operation-tags-required:
+    description: Every operation must declare at least one tag.
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: tags
+      function: truthy
+  operation-microcks-extension:
+    description: Each operation should carry an x-microcks-operation extension for mocking.
+    severity: info
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: x-microcks-operation
+      function: truthy
+
+  # ── TAGS ──────────────────────────────────────────────────────────
+  tags-defined:
+    description: A global tags array should be defined.
+    severity: info
+    given: $
+    then:
+      field: tags
+      function: truthy
+  tag-description-required:
+    description: Each global tag should have a description.
+    severity: info
+    given: $.tags[*]
+    then:
+      field: description
+      function: truthy
+  tag-title-case:
+    description: Tag names must be Title Case (e.g. Menu, Orders, Inventory).
+    severity: warn
+    given: $.tags[*].name
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[A-Z][A-Za-z]+( [A-Z][A-Za-z]+)*$"
+
+  # ── REQUEST BODIES ────────────────────────────────────────────────
+  request-body-form-encoded:
+    description: >-
+      POSLavu accepts form-encoded request bodies; operations should expose an
+      application/x-www-form-urlencoded media type.
+    severity: warn
+    given: $.paths[*][post,put,patch].requestBody.content
+    then:
+      field: application/x-www-form-urlencoded
+      function: truthy
+  request-body-schema:
+    description: Request body media types must declare a schema.
+    severity: warn
+    given: $.paths[*][post,put,patch].requestBody.content[*]
+    then:
+      field: schema
+      function: truthy
+
+  # ── RESPONSES ─────────────────────────────────────────────────────
+  response-2xx-required:
+    description: Every operation must define a 2xx success response.
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].responses
+    then:
+      field: "200"
+      function: truthy
+  response-description-required:
+    description: Every response must have a description.
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].responses[*]
+    then:
+      field: description
+      function: truthy
+  response-xml-content:
+    description: POSLavu returns XML; responses should expose an application/xml media type.
+    severity: info
+    given: $.paths[*][get,post,put,patch,delete].responses[*].content
+    then:
+      field: application/xml
+      function: truthy
+
+  # ── SCHEMAS — PROPERTY NAMING ─────────────────────────────────────
+  schema-property-snake-case:
+    description: >-
+      Schema property names must be snake_case to match POSLavu table columns
+      (acronym columns such as UPC are exempt).
+    severity: warn
+    given: $.components.schemas[*].properties.*~
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-z0-9_]*$|^[A-Z]+$"
+  schema-property-type:
+    description: Every schema property must declare a type or a $ref.
+    severity: warn
+    given: $.components.schemas[*].properties[*]
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          anyOf:
+            - required: ["type"]
+            - required: ["$ref"]
+  schema-property-description:
+    description: Schema properties should carry a description.
+    severity: info
+    given: $.components.schemas[*].properties[*]
+    then:
+      field: description
+      function: truthy
+  schema-table-enum:
+    description: >-
+      The table selector should be constrained to the documented POSLavu tables
+      via an enum.
+    severity: info
+    given: $.components.schemas.QueryRequest.properties.table
+    then:
+      field: enum
+      function: truthy
+
+  # ── SECURITY ──────────────────────────────────────────────────────
+  security-scheme-defined:
+    description: At least one security scheme must be defined.
+    severity: warn
+    given: $.components.securitySchemes
+    then:
+      function: truthy
+  security-scheme-described:
+    description: Each security scheme should be described.
+    severity: info
+    given: $.components.securitySchemes[*]
+    then:
+      field: description
+      function: truthy
+  operation-security-required:
+    description: Every operation should declare its security requirements (dataname/key/token).
+    severity: info
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: security
+      function: truthy

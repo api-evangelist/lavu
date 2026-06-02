@@ -1,0 +1,122 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Lavu (POSLavu) API — Orders
+  description: 'Orders surface of the Lavu POSLavu data API. 2 operation(s). Lead operation: Lavu Query a POSLavu Table. Self-contained Naftiko capability covering one Lavu business surface.'
+  tags:
+  - Lavu
+  - POSLavu
+  - Orders
+  created: '2026-06-02'
+  modified: '2026-06-02'
+binds:
+- namespace: env
+  keys:
+    POSLAVU_TOKEN: POSLAVU_TOKEN
+capability:
+  consumes:
+  - type: http
+    namespace: poslavu-api-orders
+    baseUri: https://admin.poslavu.com/cp/reqserv
+    description: Lavu (POSLavu) API — Orders business capability. Self-contained, no shared references.
+    authentication:
+      type: apikey
+      key: token
+      value: '{{env.POSLAVU_TOKEN}}'
+      placement: query
+    resources:
+    - name: tables
+      path: /
+      operations:
+      - name: queryTable
+        method: POST
+        description: Lavu Query a POSLavu Table
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: Form-encoded request fields.
+        outputRawFormat: xml
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: insert
+      path: /insert
+      operations:
+      - name: insertRecords
+        method: POST
+        description: Lavu Insert Records Into a POSLavu Table
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: Form-encoded request fields.
+        outputRawFormat: xml
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    namespace: poslavu-api-orders-rest
+    port: 8080
+    description: REST adapter for Lavu (POSLavu) API — Orders. One Spectral-compliant resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/tables
+      name: tables
+      description: REST surface for tables.
+      operations:
+      - method: POST
+        name: queryTable
+        description: Lavu Query a POSLavu Table
+        call: poslavu-api-orders.queryTable
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/insert
+      name: insert
+      description: REST surface for insert.
+      operations:
+      - method: POST
+        name: insertRecords
+        description: Lavu Insert Records Into a POSLavu Table
+        call: poslavu-api-orders.insertRecords
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: poslavu-api-orders-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Lavu (POSLavu) API — Orders. One tool per consumed operation, routed inline through this capability's consumes block.
+    tools:
+    - name: query-table
+      description: Lavu Query a POSLavu Table
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: poslavu-api-orders.queryTable
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: insert-records
+      description: Lavu Insert Records Into a POSLavu Table
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: poslavu-api-orders.insertRecords
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

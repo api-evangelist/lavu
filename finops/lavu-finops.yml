@@ -1,0 +1,93 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Lavu
+providerId: lavu
+created: '2026-06-02'
+modified: '2026-06-02'
+reconciled: false
+tags:
+  - FinOps
+  - FOCUS
+  - Point of Sale
+  - Payments
+  - Restaurant
+description: >-
+  FOCUS-aligned FinOps for Lavu: per-terminal monthly POS subscriptions plus
+  usage-based card payment processing and optional add-on modules. The POSLavu
+  API is not separately billed — it is included with an active account.
+sources:
+  - https://lavu.com/pricing/
+  - https://lavu.com/integrations/
+  - https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Lavu, Inc.
+serviceCategory: Point of Sale
+billingModel:
+  pricingCategory: Subscription + Pay-As-You-Go
+  billingFrequency: Annual
+  billingCurrency: USD
+  chargeCategories:
+    - Usage
+    - Purchase
+    - Tax
+    - Refund
+focusColumns:
+  ServiceName: Lavu Restaurant POS
+  ServiceCategory: Point of Sale
+  ProviderName: Lavu
+  PublisherName: Lavu, Inc.
+  InvoiceIssuerName: Lavu, Inc.
+  BillingCurrency: USD
+meters:
+  - name: terminal_subscription
+    unit: seat
+    aggregation: sum
+    dimensions:
+      - plan
+      - location
+  - name: card_transactions
+    unit: transaction
+    aggregation: count
+    dimensions:
+      - location
+      - card_brand
+  - name: card_volume
+    unit: varies
+    aggregation: sum
+    dimensions:
+      - location
+  - name: addon_modules
+    unit: month
+    aggregation: sum
+    dimensions:
+      - module
+      - location
+principles:
+  - name: Visibility
+    description: >-
+      Read billable consumption from the POSLavu reporting surface — query the
+      orders, order_contents, and order_payments tables via the API to
+      reconcile sales and payment volume against the monthly invoice and
+      per-location subscriptions.
+  - name: Allocation
+    description: >-
+      Attribute spend by location_id and register fields present on orders and
+      payments, mapping per-terminal subscription lines and processing volume to
+      individual restaurants or locations in a multi-unit operation.
+  - name: Optimization
+    description: >-
+      Right-size the number of paid terminals per location, evaluate Lavu's
+      dual-pricing / cash-discount program to offset card processing fees, and
+      drop unused add-on modules (online ordering, delivery integrations) that
+      add monthly cost.
+  - name: Accountability
+    description: >-
+      Assign each location's POS subscription and processing spend to its
+      manager; review the monthly Lavu invoice against API-derived sales volume
+      and flag variances in processing rates or terminal counts.

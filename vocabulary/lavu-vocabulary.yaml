@@ -1,0 +1,236 @@
+vocabulary: 1.0.0
+info:
+  provider: Lavu
+  description: Unified taxonomy for the Lavu (POSLavu) data API, mapping the POST-based table query/insert operations to customer-facing restaurant operations workflows.
+  created: '2026-06-02'
+  modified: '2026-06-02'
+operational:
+  apis:
+  - name: Lavu (POSLavu) API
+    namespace: poslavu-api
+    version: '1.0'
+    baseUrl: https://admin.poslavu.com/cp/reqserv
+    status: active
+  resources:
+  - name: menu_groups
+    api: poslavu-api
+    actions:
+    - query
+  - name: menu_categories
+    api: poslavu-api
+    actions:
+    - query
+  - name: menu_items
+    api: poslavu-api
+    actions:
+    - query
+    - insert
+  - name: tables
+    api: poslavu-api
+    actions:
+    - query
+  - name: orders
+    api: poslavu-api
+    actions:
+    - query
+    - insert
+  - name: order_contents
+    api: poslavu-api
+    actions:
+    - query
+    - insert
+  - name: order_payments
+    api: poslavu-api
+    actions:
+    - query
+    - insert
+  - name: ingredients
+    api: poslavu-api
+    actions:
+    - query
+  - name: ingredient_usage
+    api: poslavu-api
+    actions:
+    - query
+  actions:
+  - name: query
+    httpMethod: POST
+    pattern: query
+    description: Retrieve rows from a table with optional column/value or range filters and pagination.
+  - name: insert
+    httpMethod: POST
+    pattern: write
+    description: Insert one or more XML row payloads into a table via cmd=insert.
+  schemas:
+    menu:
+    - MenuGroup
+    - MenuCategory
+    - MenuItem
+    floor:
+    - Table
+    transactions:
+    - Order
+    - OrderContent
+    - OrderPayment
+  parameters:
+    pagination:
+    - limit
+    identifiers:
+    - dataname
+    - table
+    filters:
+    - column
+    - value
+    - value_min
+    - value_max
+  enums:
+    tables:
+    - menu_groups
+    - menu_categories
+    - menu_items
+    - tables
+    - orders
+    - order_contents
+    - order_payments
+    - ingredients
+    - ingredient_usage
+    commands:
+    - insert
+  authentication:
+    schemes:
+    - posLavuCredentials
+    description: Three form-encoded credentials (dataname, key, token) issued in the API tab of the POSLavu Control Panel.
+capability:
+  workflows:
+  - name: Lavu (POSLavu) API — Inventory
+    file: capabilities/poslavu-api-inventory.yaml
+    description: 'Inventory surface of the Lavu POSLavu data API. 2 operation(s). Lead operation: Lavu Query a POSLavu Table. Self-contained Naftiko capability covering one Lavu business surface.'
+    apis:
+    - poslavu-api
+    toolCount: 2
+    personas:
+    - Restaurant Operator
+    - Integration Developer
+    domains:
+    - Inventory
+  - name: Lavu (POSLavu) API — Menu
+    file: capabilities/poslavu-api-menu.yaml
+    description: 'Menu surface of the Lavu POSLavu data API. 2 operation(s). Lead operation: Lavu Query a POSLavu Table. Self-contained Naftiko capability covering one Lavu business surface.'
+    apis:
+    - poslavu-api
+    toolCount: 2
+    personas:
+    - Restaurant Operator
+    - Integration Developer
+    domains:
+    - Menu
+  - name: Lavu (POSLavu) API — Orders
+    file: capabilities/poslavu-api-orders.yaml
+    description: 'Orders surface of the Lavu POSLavu data API. 2 operation(s). Lead operation: Lavu Query a POSLavu Table. Self-contained Naftiko capability covering one Lavu business surface.'
+    apis:
+    - poslavu-api
+    toolCount: 2
+    personas:
+    - Restaurant Operator
+    - Integration Developer
+    domains:
+    - Orders
+  - name: Lavu (POSLavu) API — Tables
+    file: capabilities/poslavu-api-tables.yaml
+    description: 'Tables surface of the Lavu POSLavu data API. 1 operation(s). Lead operation: Lavu Query a POSLavu Table. Self-contained Naftiko capability covering one Lavu business surface.'
+    apis:
+    - poslavu-api
+    toolCount: 1
+    personas:
+    - Restaurant Operator
+    - Integration Developer
+    domains:
+    - Tables
+  personas:
+  - id: restaurant-operator
+    name: Restaurant Operator
+    description: Restaurant owner or manager extending Lavu POS to fit their operation.
+    workflows:
+    - Lavu (POSLavu) API — Inventory
+    - Lavu (POSLavu) API — Menu
+    - Lavu (POSLavu) API — Orders
+    - Lavu (POSLavu) API — Tables
+  - id: integration-developer
+    name: Integration Developer
+    description: Developer building peripheral components and tailored integrations against the POSLavu API.
+    workflows:
+    - Lavu (POSLavu) API — Inventory
+    - Lavu (POSLavu) API — Menu
+    - Lavu (POSLavu) API — Orders
+    - Lavu (POSLavu) API — Tables
+  domains:
+  - name: Menu
+    description: Menu groups, categories, and items.
+  - name: Tables
+    description: Restaurant floor table layout.
+  - name: Orders
+    description: Orders, line items, and payments.
+  - name: Inventory
+    description: Ingredients and ingredient usage.
+  namespaces:
+  - consumed: poslavu-api-menu
+    rest: poslavu-api-menu-rest
+    mcp: poslavu-api-menu-mcp
+    restPort: 8080
+    mcpPort: 9090
+  - consumed: poslavu-api-tables
+    rest: poslavu-api-tables-rest
+    mcp: poslavu-api-tables-mcp
+    restPort: 8080
+    mcpPort: 9090
+  - consumed: poslavu-api-orders
+    rest: poslavu-api-orders-rest
+    mcp: poslavu-api-orders-mcp
+    restPort: 8080
+    mcpPort: 9090
+  - consumed: poslavu-api-inventory
+    rest: poslavu-api-inventory-rest
+    mcp: poslavu-api-inventory-mcp
+    restPort: 8080
+    mcpPort: 9090
+  binds:
+  - env: POSLAVU_TOKEN
+    description: POSLavu API token used as the representative credential.
+    workflows:
+    - Lavu (POSLavu) API — Inventory
+    - Lavu (POSLavu) API — Menu
+    - Lavu (POSLavu) API — Orders
+    - Lavu (POSLavu) API — Tables
+crossReference:
+- resource: orders
+  operations:
+  - queryTable
+  - insertRecords
+  workflows:
+  - Lavu (POSLavu) API — Orders
+  personas:
+  - Restaurant Operator
+  - Integration Developer
+- resource: menu_items
+  operations:
+  - queryTable
+  - insertRecords
+  workflows:
+  - Lavu (POSLavu) API — Menu
+  personas:
+  - Restaurant Operator
+  - Integration Developer
+- resource: tables
+  operations:
+  - queryTable
+  workflows:
+  - Lavu (POSLavu) API — Tables
+  personas:
+  - Restaurant Operator
+- resource: ingredients
+  operations:
+  - queryTable
+  workflows:
+  - Lavu (POSLavu) API — Inventory
+  personas:
+  - Restaurant Operator

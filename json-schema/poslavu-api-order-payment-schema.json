@@ -1,0 +1,244 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "OrderPayment",
+  "description": "A payment record from the order_payments table.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/lavu/refs/heads/main/json-schema/poslavu-api-order-payment-schema.json",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Payment row identifier.",
+      "example": "1239"
+    },
+    "order_id": {
+      "type": "string",
+      "description": "Identifier of the parent order (may include a check suffix, e.g. 1-2).",
+      "example": "1-2"
+    },
+    "check": {
+      "type": "string",
+      "description": "Check number.",
+      "example": "1"
+    },
+    "amount": {
+      "type": "string",
+      "description": "Payment amount.",
+      "example": "5.50"
+    },
+    "card_desc": {
+      "type": "string",
+      "description": "Card description.",
+      "example": ""
+    },
+    "transaction_id": {
+      "type": "string",
+      "description": "Payment transaction identifier.",
+      "example": ""
+    },
+    "refunded": {
+      "type": "string",
+      "description": "Whether refunded (1) or not (0).",
+      "example": "0"
+    },
+    "refund_notes": {
+      "type": "string",
+      "description": "Refund notes.",
+      "example": ""
+    },
+    "refunded_by": {
+      "type": "string",
+      "description": "Identifier of the employee who refunded.",
+      "example": "0"
+    },
+    "refund_pnref": {
+      "type": "string",
+      "description": "Refund processor reference.",
+      "example": ""
+    },
+    "tip_amount": {
+      "type": "string",
+      "description": "Tip amount.",
+      "example": ""
+    },
+    "auth": {
+      "type": "string",
+      "description": "Authorization flag.",
+      "example": "0"
+    },
+    "loc_id": {
+      "type": "string",
+      "description": "Location identifier.",
+      "example": "9"
+    },
+    "processed": {
+      "type": "string",
+      "description": "Whether processed (1) or not (0).",
+      "example": "0"
+    },
+    "auth_code": {
+      "type": "string",
+      "description": "Authorization code.",
+      "example": ""
+    },
+    "card_type": {
+      "type": "string",
+      "description": "Card type.",
+      "example": ""
+    },
+    "datetime": {
+      "type": "string",
+      "description": "Payment timestamp.",
+      "example": "2011-10-10 11:50:38"
+    },
+    "pay_type": {
+      "type": "string",
+      "description": "Payment type (e.g. Cash).",
+      "example": "Cash"
+    },
+    "voided": {
+      "type": "string",
+      "description": "Whether voided (1) or not (0).",
+      "example": "0"
+    },
+    "void_notes": {
+      "type": "string",
+      "description": "Void notes.",
+      "example": ""
+    },
+    "voided_by": {
+      "type": "string",
+      "description": "Identifier of the employee who voided.",
+      "example": "0"
+    },
+    "void_pnref": {
+      "type": "string",
+      "description": "Void processor reference.",
+      "example": ""
+    },
+    "register": {
+      "type": "string",
+      "description": "Register name.",
+      "example": "receipt"
+    },
+    "got_response": {
+      "type": "string",
+      "description": "Whether a processor response was received (1) or not (0).",
+      "example": "0"
+    },
+    "transtype": {
+      "type": "string",
+      "description": "Transaction type.",
+      "example": ""
+    },
+    "split_tender_id": {
+      "type": "string",
+      "description": "Split tender identifier.",
+      "example": ""
+    },
+    "temp_data": {
+      "type": "string",
+      "description": "Temporary data.",
+      "example": ""
+    },
+    "change": {
+      "type": "string",
+      "description": "Change returned.",
+      "example": ""
+    },
+    "total_collected": {
+      "type": "string",
+      "description": "Total amount collected.",
+      "example": "5.50"
+    },
+    "record_no": {
+      "type": "string",
+      "description": "Record number.",
+      "example": ""
+    },
+    "server_name": {
+      "type": "string",
+      "description": "Server name.",
+      "example": "Ancori"
+    },
+    "action": {
+      "type": "string",
+      "description": "Payment action (e.g. Sale).",
+      "example": "Sale"
+    },
+    "ref_data": {
+      "type": "string",
+      "description": "Reference data.",
+      "example": ""
+    },
+    "process_data": {
+      "type": "string",
+      "description": "Processing data.",
+      "example": ""
+    },
+    "voice_auth": {
+      "type": "string",
+      "description": "Whether voice authorized (1) or not (0).",
+      "example": "0"
+    },
+    "server_id": {
+      "type": "string",
+      "description": "Server identifier.",
+      "example": "15"
+    },
+    "preauth_id": {
+      "type": "string",
+      "description": "Pre-authorization identifier.",
+      "example": ""
+    },
+    "tip_for_id": {
+      "type": "string",
+      "description": "Identifier the tip applies to.",
+      "example": "0"
+    },
+    "swipe_grade": {
+      "type": "string",
+      "description": "Card swipe grade.",
+      "example": ""
+    },
+    "batch_no": {
+      "type": "string",
+      "description": "Batch number.",
+      "example": ""
+    },
+    "register_name": {
+      "type": "string",
+      "description": "Register name.",
+      "example": "receipt"
+    },
+    "pay_type_id": {
+      "type": "string",
+      "description": "Payment type identifier.",
+      "example": "1"
+    },
+    "first_four": {
+      "type": "string",
+      "description": "First four digits of the card.",
+      "example": ""
+    },
+    "mpshc_pid": {
+      "type": "string",
+      "description": "Processor product identifier.",
+      "example": ""
+    },
+    "server_time": {
+      "type": "string",
+      "description": "Server-side timestamp.",
+      "example": "2011-10-10 12:49:26"
+    },
+    "info": {
+      "type": "string",
+      "description": "Additional information.",
+      "example": ""
+    },
+    "signature": {
+      "type": "string",
+      "description": "Whether a signature was captured (1) or not (0).",
+      "example": "0"
+    }
+  }
+}

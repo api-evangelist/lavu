@@ -1,0 +1,299 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/lavu/refs/heads/main/json-structure/poslavu-api-order-structure.json",
+  "name": "Order",
+  "description": "An order from the orders table.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Row identifier.",
+      "example": "1"
+    },
+    "order_id": {
+      "type": "string",
+      "description": "Order identifier.",
+      "example": "1"
+    },
+    "location": {
+      "type": "string",
+      "description": "Location name.",
+      "example": "Dev West Side"
+    },
+    "location_id": {
+      "type": "string",
+      "description": "Location identifier.",
+      "example": "9"
+    },
+    "opened": {
+      "type": "string",
+      "description": "Timestamp the order was opened.",
+      "example": "2010-10-06 12:01:20"
+    },
+    "closed": {
+      "type": "string",
+      "description": "Timestamp the order was closed.",
+      "example": "2011-01-26 17:16:31"
+    },
+    "subtotal": {
+      "type": "string",
+      "description": "Order subtotal.",
+      "example": "40.50"
+    },
+    "taxrate": {
+      "type": "string",
+      "description": "Applied tax rate.",
+      "example": "0.06875"
+    },
+    "tax": {
+      "type": "string",
+      "description": "Tax amount.",
+      "example": "2.78"
+    },
+    "total": {
+      "type": "string",
+      "description": "Order total.",
+      "example": "43.28"
+    },
+    "server": {
+      "type": "string",
+      "description": "Server name.",
+      "example": "Ancori Lifigi"
+    },
+    "server_id": {
+      "type": "string",
+      "description": "Server identifier.",
+      "example": "5"
+    },
+    "tablename": {
+      "type": "string",
+      "description": "Name of the table the order was placed at.",
+      "example": "Booth 7"
+    },
+    "send_status": {
+      "type": "string",
+      "description": "Send status flag.",
+      "example": "1"
+    },
+    "discount": {
+      "type": "string",
+      "description": "Discount amount.",
+      "example": "0.00"
+    },
+    "discount_sh": {
+      "type": "string",
+      "description": "Discount shorthand.",
+      "example": ""
+    },
+    "gratuity": {
+      "type": "string",
+      "description": "Gratuity amount.",
+      "example": "0.00"
+    },
+    "gratuity_percent": {
+      "type": "string",
+      "description": "Gratuity percentage.",
+      "example": "0.2250"
+    },
+    "card_gratuity": {
+      "type": "string",
+      "description": "Card gratuity amount.",
+      "example": "0.00"
+    },
+    "cash_paid": {
+      "type": "string",
+      "description": "Cash paid.",
+      "example": "46.64"
+    },
+    "card_paid": {
+      "type": "string",
+      "description": "Card paid.",
+      "example": "0.00"
+    },
+    "gift_certificate": {
+      "type": "string",
+      "description": "Gift certificate amount applied.",
+      "example": "0.00"
+    },
+    "change_amount": {
+      "type": "string",
+      "description": "Change returned.",
+      "example": "3.36"
+    },
+    "reopen_refund": {
+      "type": "string",
+      "description": "Refund amount on reopen.",
+      "example": "0.00"
+    },
+    "void": {
+      "type": "string",
+      "description": "Whether the order is voided (1) or not (0).",
+      "example": "1"
+    },
+    "cashier": {
+      "type": "string",
+      "description": "Cashier name.",
+      "example": "Ancori Lifigi"
+    },
+    "cashier_id": {
+      "type": "string",
+      "description": "Cashier identifier.",
+      "example": "5"
+    },
+    "auth_by": {
+      "type": "string",
+      "description": "Name of the authorizing employee.",
+      "example": ""
+    },
+    "auth_by_id": {
+      "type": "string",
+      "description": "Identifier of the authorizing employee.",
+      "example": "0"
+    },
+    "guests": {
+      "type": "string",
+      "description": "Guest count.",
+      "example": "1"
+    },
+    "email": {
+      "type": "string",
+      "description": "Customer email.",
+      "example": ""
+    },
+    "permission": {
+      "type": "string",
+      "description": "Permission flag.",
+      "example": "0"
+    },
+    "check_has_printed": {
+      "type": "string",
+      "description": "Whether the check has printed (1) or not (0).",
+      "example": "1"
+    },
+    "no_of_checks": {
+      "type": "string",
+      "description": "Number of checks.",
+      "example": "2"
+    },
+    "card_desc": {
+      "type": "string",
+      "description": "Card description.",
+      "example": ""
+    },
+    "transaction_id": {
+      "type": "string",
+      "description": "Payment transaction identifier.",
+      "example": ""
+    },
+    "multiple_tax_rates": {
+      "type": "string",
+      "description": "Whether multiple tax rates apply (1) or not (0).",
+      "example": "0"
+    },
+    "tab": {
+      "type": "string",
+      "description": "Whether the order is a tab (1) or not (0).",
+      "example": "0"
+    },
+    "original_id": {
+      "type": "string",
+      "description": "Original order identifier.",
+      "example": "0"
+    },
+    "deposit_status": {
+      "type": "string",
+      "description": "Deposit status.",
+      "example": "0"
+    },
+    "register": {
+      "type": "string",
+      "description": "Register name.",
+      "example": ""
+    },
+    "refunded": {
+      "type": "string",
+      "description": "Whether refunded (1) or not (0).",
+      "example": "0"
+    },
+    "refund_notes": {
+      "type": "string",
+      "description": "Refund notes.",
+      "example": ""
+    },
+    "refunded_cc": {
+      "type": "string",
+      "description": "Whether refunded to card (1) or not (0).",
+      "example": ""
+    },
+    "refund_notes_cc": {
+      "type": "string",
+      "description": "Card refund notes.",
+      "example": ""
+    },
+    "refunded_by": {
+      "type": "string",
+      "description": "Identifier of the employee who refunded.",
+      "example": "0"
+    },
+    "refunded_by_cc": {
+      "type": "string",
+      "description": "Identifier of the employee who refunded to card.",
+      "example": "0"
+    },
+    "cash_tip": {
+      "type": "string",
+      "description": "Cash tip amount.",
+      "example": ""
+    },
+    "discount_value": {
+      "type": "string",
+      "description": "Discount value.",
+      "example": ""
+    },
+    "reopened_datetime": {
+      "type": "string",
+      "description": "Timestamp the order was reopened.",
+      "example": ""
+    },
+    "discount_type": {
+      "type": "string",
+      "description": "Discount type.",
+      "example": ""
+    },
+    "deposit_amount": {
+      "type": "string",
+      "description": "Deposit amount.",
+      "example": ""
+    },
+    "subtotal_without_deposit": {
+      "type": "string",
+      "description": "Subtotal excluding deposit.",
+      "example": ""
+    },
+    "togo_status": {
+      "type": "string",
+      "description": "To-go status.",
+      "example": ""
+    },
+    "togo_phone": {
+      "type": "string",
+      "description": "To-go phone number.",
+      "example": ""
+    },
+    "togo_time": {
+      "type": "string",
+      "description": "To-go time.",
+      "example": ""
+    },
+    "cash_applied": {
+      "type": "string",
+      "description": "Cash applied to the order.",
+      "example": "43.28"
+    },
+    "rounding_amount": {
+      "type": "string",
+      "description": "Rounding adjustment amount.",
+      "example": ""
+    }
+  }
+}

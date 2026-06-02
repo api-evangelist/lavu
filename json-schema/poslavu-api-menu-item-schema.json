@@ -1,0 +1,169 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MenuItem",
+  "description": "A menu item from the menu_items table.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/lavu/refs/heads/main/json-schema/poslavu-api-menu-item-schema.json",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Menu item identifier.",
+      "example": "813"
+    },
+    "category_id": {
+      "type": "string",
+      "description": "Identifier of the parent menu category.",
+      "example": "113"
+    },
+    "menu_id": {
+      "type": "string",
+      "description": "Identifier of the menu this item belongs to.",
+      "example": "11"
+    },
+    "name": {
+      "type": "string",
+      "description": "Item name.",
+      "example": "Grox"
+    },
+    "price": {
+      "type": "string",
+      "description": "Item price.",
+      "example": "25"
+    },
+    "description": {
+      "type": "string",
+      "description": "Item description.",
+      "example": ""
+    },
+    "image": {
+      "type": "string",
+      "description": "Primary item image filename.",
+      "example": "ann_smith_robot_dino.jpg"
+    },
+    "image2": {
+      "type": "string",
+      "description": "Secondary item image filename.",
+      "example": ""
+    },
+    "image3": {
+      "type": "string",
+      "description": "Tertiary item image filename.",
+      "example": ""
+    },
+    "misc_content": {
+      "type": "string",
+      "description": "Miscellaneous content.",
+      "example": ""
+    },
+    "options1": {
+      "type": "string",
+      "description": "Option set one.",
+      "example": ""
+    },
+    "options2": {
+      "type": "string",
+      "description": "Option set two.",
+      "example": ""
+    },
+    "options3": {
+      "type": "string",
+      "description": "Option set three.",
+      "example": ""
+    },
+    "active": {
+      "type": "string",
+      "description": "Whether the item is active (1) or not (0).",
+      "example": "1"
+    },
+    "print": {
+      "type": "string",
+      "description": "Whether the item prints (1) or not (0).",
+      "example": "1"
+    },
+    "quick_item": {
+      "type": "string",
+      "description": "Whether the item is a quick item (1) or not (0).",
+      "example": "0"
+    },
+    "last_modified_date": {
+      "type": "string",
+      "description": "Last modification timestamp.",
+      "example": "0000-00-00 00:00:00"
+    },
+    "printer": {
+      "type": "string",
+      "description": "Assigned printer identifier.",
+      "example": "0"
+    },
+    "apply_taxrate": {
+      "type": "string",
+      "description": "Tax rate application mode (e.g. Default).",
+      "example": "Default"
+    },
+    "custom_taxrate": {
+      "type": "string",
+      "description": "Custom tax rate when not using the default.",
+      "example": ""
+    },
+    "modifier_list_id": {
+      "type": "string",
+      "description": "Associated modifier list identifier.",
+      "example": "0"
+    },
+    "forced_modifier_group_id": {
+      "type": "string",
+      "description": "Forced modifier group identifier.",
+      "example": "C"
+    },
+    "ingredients": {
+      "type": "string",
+      "description": "Associated ingredients.",
+      "example": ""
+    },
+    "open_item": {
+      "type": "string",
+      "description": "Whether the item is an open item (1) or not (0).",
+      "example": "0"
+    },
+    "hidden_value": {
+      "type": "string",
+      "description": "Hidden value field one.",
+      "example": ""
+    },
+    "hidden_value2": {
+      "type": "string",
+      "description": "Hidden value field two.",
+      "example": ""
+    },
+    "allow_deposit": {
+      "type": "string",
+      "description": "Whether deposits are allowed (1) or not (0).",
+      "example": "0"
+    },
+    "UPC": {
+      "type": "string",
+      "description": "Universal Product Code.",
+      "example": ""
+    },
+    "hidden_value3": {
+      "type": "string",
+      "description": "Hidden value field three.",
+      "example": ""
+    },
+    "inv_count": {
+      "type": "string",
+      "description": "Inventory count.",
+      "example": "0"
+    },
+    "show_in_app": {
+      "type": "string",
+      "description": "Whether the item shows in the app (1) or not (0).",
+      "example": "1"
+    },
+    "super_group_id": {
+      "type": "string",
+      "description": "Parent super group identifier.",
+      "example": ""
+    }
+  }
+}

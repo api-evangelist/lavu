@@ -1,0 +1,49 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Lavu
+providerId: lavu
+created: '2026-06-02'
+modified: '2026-06-02'
+reconciled: false
+tags:
+  - Rate Limiting
+  - Point of Sale
+  - Restaurant
+description: >-
+  The POSLavu API documentation (admin.poslavu.com/cp/areas/api_doc.html)
+  documents the request endpoint, credentials, tables, and query/insert
+  semantics but does not publish any request-rate, concurrency, or quota limits.
+  API access is scoped to the account's dataname/key/token credentials issued in
+  the API tab of the POSLavu Control Panel, so any throttling is presumed to be
+  per-account and enforced server-side without published numbers. Limits below
+  are therefore strings referencing the docs rather than confirmed values, and
+  reconciled is false.
+sources:
+  - https://admin.poslavu.com/cp/areas/api_doc.html
+  - https://lavu.com/integrations/
+responseCodes:
+  throttled: 429
+limits:
+  - name: POSLavu API requests (per account)
+    scope: account
+    metric: varies
+    limit: 'not published; scoped to account dataname/key/token credentials'
+    notes: >-
+      No documented per-second/per-minute request ceiling. Use the limit
+      (offset,count) parameter to paginate large table reads and avoid large
+      unbounded queries.
+policies:
+  - name: Pagination
+    description: >-
+      Use the limit parameter in offset,count form (e.g. 0,20) to page through
+      large tables such as orders rather than requesting full result sets.
+  - name: Range filtering
+    description: >-
+      Constrain time-series reads (e.g. orders by closed date) with
+      column/value_min/value_max range filters to reduce response size and load.
+  - name: Backoff
+    description: >-
+      Treat HTTP errors and empty/error XML responses as a signal to back off
+      and retry with exponential delay; the API surface is account-gated and
+      undocumented for hard limits.
