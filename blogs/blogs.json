@@ -1,0 +1,21 @@
+{
+  "repo": "lavu",
+  "feeds": [
+    {
+      "source": "https://lavu.com/blog/",
+      "feed_url": "https://lavu.com/blog/",
+      "title": "",
+      "saved": 0,
+      "method": "none"
+    },
+    {
+      "source": "https://lavu.com",
+      "feed_url": "https://lavu.com/rss.xml",
+      "title": "",
+      "saved": 0,
+      "method": "discovered"
+    }
+  ],
+  "post_count": 0,
+  "fetched": "2026-06-14T20:42:17Z"
+}

@@ -1,0 +1,1567 @@
+{
+  "item": [
+    {
+      "id": "ff159993-77ff-44ae-b312-a0f4a674fd74",
+      "name": "Menu",
+      "description": {
+        "content": "Menu groups, categories, and items.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "78dc967f-0a25-4209-b56d-6c6cdd2f3d94",
+          "name": "Lavu Query a POSLavu Table",
+          "request": {
+            "name": "Lavu Query a POSLavu Table",
+            "description": {
+              "content": "Retrieve rows from a POSLavu data table. Provide the `dataname`, `key`, and `token` credentials from the API tab of the POSLavu Control Panel, select the `table`, and optionally filter with `column`/`value` (exact match) or `column`/`value_min`/`value_max` (range), and paginate with `limit` (offset,count). Responses are returned as XML `<row>` elements.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "query"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "dataname",
+                  "value": "<string>",
+                  "description": "(Required) Account data name from the API tab of the POSLavu Control Panel."
+                },
+                {
+                  "disabled": false,
+                  "key": "key",
+                  "value": "<string>",
+                  "description": "(Required) API key from the API tab of the POSLavu Control Panel."
+                },
+                {
+                  "disabled": false,
+                  "key": "token",
+                  "value": "<string>",
+                  "description": "(Required) API token from the API tab of the POSLavu Control Panel."
+                },
+                {
+                  "disabled": false,
+                  "key": "table",
+                  "value": "<string>",
+                  "description": "(Required) The data table to query."
+                },
+                {
+                  "disabled": false,
+                  "key": "column",
+                  "value": "<string>",
+                  "description": "Column name to filter on."
+                },
+                {
+                  "disabled": false,
+                  "key": "value",
+                  "value": "<string>",
+                  "description": "Exact value to match for the filter column."
+                },
+                {
+                  "disabled": false,
+                  "key": "value_min",
+                  "value": "<string>",
+                  "description": "Inclusive lower bound for a range filter on the filter column."
+                },
+                {
+                  "disabled": false,
+                  "key": "value_max",
+                  "value": "<string>",
+                  "description": "Inclusive upper bound for a range filter on the filter column."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<string>",
+                  "description": "Pagination control in `offset,count` format (e.g. `0,20`)."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "374dc712-3583-4e74-abf9-8fc4de46bb58",
+              "name": "XML document containing zero or more `<row>` elements.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Account data name from the API tab of the POSLavu Control Panel.",
+                        "type": "text/plain"
+                      },
+                      "key": "dataname",
+                      "value": "MyRestaurant"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) API key from the API tab of the POSLavu Control Panel.",
+                        "type": "text/plain"
+                      },
+                      "key": "key",
+                      "value": "a1b2c3d4e5f6"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) API token from the API tab of the POSLavu Control Panel.",
+                        "type": "text/plain"
+                      },
+                      "key": "token",
+                      "value": "f6e5d4c3b2a1"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The data table to query.",
+                        "type": "text/plain"
+                      },
+                      "key": "table",
+                      "value": "orders"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Column name to filter on.",
+                        "type": "text/plain"
+                      },
+                      "key": "column",
+                      "value": "closed"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Inclusive lower bound for a range filter on the filter column.",
+                        "type": "text/plain"
+                      },
+                      "key": "value_min",
+                      "value": "2011-01-01 00:00:00"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Inclusive upper bound for a range filter on the filter column.",
+                        "type": "text/plain"
+                      },
+                      "key": "value_max",
+                      "value": "2011-02-01 00:00:00"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Pagination control in `offset,count` format (e.g. `0,20`).",
+                        "type": "text/plain"
+                      },
+                      "key": "limit",
+                      "value": "0,20"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c13da763-bc1b-45ce-8ec7-99266050e8c6",
+          "name": "Lavu Insert Records Into a POSLavu Table",
+          "request": {
+            "name": "Lavu Insert Records Into a POSLavu Table",
+            "description": {
+              "content": "Insert one or more records into a POSLavu data table. Send `cmd=insert`, the target `table`, and a `contents` field containing one or more XML `<row>` payloads. Writes target the v2 request server (https://admin.poslavu.com/v2/reqserv). On success for an order insert, the API returns a `<result>` element containing the new `<id>` and `<order_id>`. Note this path is documented via the `cmd=insert` POST variable rather than a distinct URL path; it is modeled here as a separate operation for clarity.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "insert"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "query"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "dataname",
+                  "value": "<string>",
+                  "description": "(Required) Account data name from the API tab of the POSLavu Control Panel."
+                },
+                {
+                  "disabled": false,
+                  "key": "key",
+                  "value": "<string>",
+                  "description": "(Required) API key from the API tab of the POSLavu Control Panel."
+                },
+                {
+                  "disabled": false,
+                  "key": "token",
+                  "value": "<string>",
+                  "description": "(Required) API token from the API tab of the POSLavu Control Panel."
+                },
+                {
+                  "disabled": false,
+                  "key": "cmd",
+                  "value": "<string>",
+                  "description": "(Required) Command selector; must be `insert` for write operations."
+                },
+                {
+                  "disabled": false,
+                  "key": "table",
+                  "value": "<string>",
+                  "description": "(Required) The data table to insert into."
+                },
+                {
+                  "disabled": false,
+                  "key": "contents",
+                  "value": "<string>",
+                  "description": "(Required) One or more XML `<row>` payloads representing the records to insert."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "5f073559-f3d0-4621-aad9-8be98cc5c79e",
+              "name": "XML `<result>` element with the new record id and order id.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "insert"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Account data name from the API tab of the POSLavu Control Panel.",
+                        "type": "text/plain"
+                      },
+                      "key": "dataname",
+                      "value": "MyRestaurant"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) API key from the API tab of the POSLavu Control Panel.",
+                        "type": "text/plain"
+                      },
+                      "key": "key",
+                      "value": "a1b2c3d4e5f6"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) API token from the API tab of the POSLavu Control Panel.",
+                        "type": "text/plain"
+                      },
+                      "key": "token",
+                      "value": "f6e5d4c3b2a1"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Command selector; must be `insert` for write operations.",
+                        "type": "text/plain"
+                      },
+                      "key": "cmd",
+                      "value": "insert"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The data table to insert into.",
+                        "type": "text/plain"
+                      },
+                      "key": "table",
+                      "value": "orders"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) One or more XML `<row>` payloads representing the records to insert.",
+                        "type": "text/plain"
+                      },
+                      "key": "contents",
+                      "value": "<row><opened>2011-09-06 16:10:00</opened><subtotal>14.25</subtotal><total>15.23</total><server>Ancori</server><guests>2</guests></row>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "b86d3f6b-2590-40cc-87e8-2e4859e7fe0b",
+      "name": "Tables",
+      "description": {
+        "content": "Restaurant floor table layout.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6c8a36a5-7bd8-41a8-b0e6-a9a971b5d209",
+          "name": "Lavu Query a POSLavu Table",
+          "request": {
+            "name": "Lavu Query a POSLavu Table",
+            "description": {
+              "content": "Retrieve rows from a POSLavu data table. Provide the `dataname`, `key`, and `token` credentials from the API tab of the POSLavu Control Panel, select the `table`, and optionally filter with `column`/`value` (exact match) or `column`/`value_min`/`value_max` (range), and paginate with `limit` (offset,count). Responses are returned as XML `<row>` elements.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "query"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "dataname",
+                  "value": "<string>",
+                  "description": "(Required) Account data name from the API tab of the POSLavu Control Panel."
+                },
+                {
+                  "disabled": false,
+                  "key": "key",
+                  "value": "<string>",
+                  "description": "(Required) API key from the API tab of the POSLavu Control Panel."
+                },
+                {
+                  "disabled": false,
+                  "key": "token",
+                  "value": "<string>",
+                  "description": "(Required) API token from the API tab of the POSLavu Control Panel."
+                },
+                {
+                  "disabled": false,
+                  "key": "table",
+                  "value": "<string>",
+                  "description": "(Required) The data table to query."
+                },
+                {
+                  "disabled": false,
+                  "key": "column",
+                  "value": "<string>",
+                  "description": "Column name to filter on."
+                },
+                {
+                  "disabled": false,
+                  "key": "value",
+                  "value": "<string>",
+                  "description": "Exact value to match for the filter column."
+                },
+                {
+                  "disabled": false,
+                  "key": "value_min",
+                  "value": "<string>",
+                  "description": "Inclusive lower bound for a range filter on the filter column."
+                },
+                {
+                  "disabled": false,
+                  "key": "value_max",
+                  "value": "<string>",
+                  "description": "Inclusive upper bound for a range filter on the filter column."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<string>",
+                  "description": "Pagination control in `offset,count` format (e.g. `0,20`)."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "041b45d0-3792-4e73-b232-da2f6430f224",
+              "name": "XML document containing zero or more `<row>` elements.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Account data name from the API tab of the POSLavu Control Panel.",
+                        "type": "text/plain"
+                      },
+                      "key": "dataname",
+                      "value": "MyRestaurant"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) API key from the API tab of the POSLavu Control Panel.",
+                        "type": "text/plain"
+                      },
+                      "key": "key",
+                      "value": "a1b2c3d4e5f6"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) API token from the API tab of the POSLavu Control Panel.",
+                        "type": "text/plain"
+                      },
+                      "key": "token",
+                      "value": "f6e5d4c3b2a1"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The data table to query.",
+                        "type": "text/plain"
+                      },
+                      "key": "table",
+                      "value": "orders"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Column name to filter on.",
+                        "type": "text/plain"
+                      },
+                      "key": "column",
+                      "value": "closed"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Inclusive lower bound for a range filter on the filter column.",
+                        "type": "text/plain"
+                      },
+                      "key": "value_min",
+                      "value": "2011-01-01 00:00:00"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Inclusive upper bound for a range filter on the filter column.",
+                        "type": "text/plain"
+                      },
+                      "key": "value_max",
+                      "value": "2011-02-01 00:00:00"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Pagination control in `offset,count` format (e.g. `0,20`).",
+                        "type": "text/plain"
+                      },
+                      "key": "limit",
+                      "value": "0,20"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "0f89f948-b83a-4239-904d-5e0c84c9c73a",
+      "name": "Orders",
+      "description": {
+        "content": "Orders, order contents, and payments.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "dcdd32ee-0afb-47db-b481-903dcb5d9166",
+          "name": "Lavu Query a POSLavu Table",
+          "request": {
+            "name": "Lavu Query a POSLavu Table",
+            "description": {
+              "content": "Retrieve rows from a POSLavu data table. Provide the `dataname`, `key`, and `token` credentials from the API tab of the POSLavu Control Panel, select the `table`, and optionally filter with `column`/`value` (exact match) or `column`/`value_min`/`value_max` (range), and paginate with `limit` (offset,count). Responses are returned as XML `<row>` elements.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "query"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "dataname",
+                  "value": "<string>",
+                  "description": "(Required) Account data name from the API tab of the POSLavu Control Panel."
+                },
+                {
+                  "disabled": false,
+                  "key": "key",
+                  "value": "<string>",
+                  "description": "(Required) API key from the API tab of the POSLavu Control Panel."
+                },
+                {
+                  "disabled": false,
+                  "key": "token",
+                  "value": "<string>",
+                  "description": "(Required) API token from the API tab of the POSLavu Control Panel."
+                },
+                {
+                  "disabled": false,
+                  "key": "table",
+                  "value": "<string>",
+                  "description": "(Required) The data table to query."
+                },
+                {
+                  "disabled": false,
+                  "key": "column",
+                  "value": "<string>",
+                  "description": "Column name to filter on."
+                },
+                {
+                  "disabled": false,
+                  "key": "value",
+                  "value": "<string>",
+                  "description": "Exact value to match for the filter column."
+                },
+                {
+                  "disabled": false,
+                  "key": "value_min",
+                  "value": "<string>",
+                  "description": "Inclusive lower bound for a range filter on the filter column."
+                },
+                {
+                  "disabled": false,
+                  "key": "value_max",
+                  "value": "<string>",
+                  "description": "Inclusive upper bound for a range filter on the filter column."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<string>",
+                  "description": "Pagination control in `offset,count` format (e.g. `0,20`)."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "2148e257-ca61-4594-abf0-c0fe173eeb40",
+              "name": "XML document containing zero or more `<row>` elements.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Account data name from the API tab of the POSLavu Control Panel.",
+                        "type": "text/plain"
+                      },
+                      "key": "dataname",
+                      "value": "MyRestaurant"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) API key from the API tab of the POSLavu Control Panel.",
+                        "type": "text/plain"
+                      },
+                      "key": "key",
+                      "value": "a1b2c3d4e5f6"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) API token from the API tab of the POSLavu Control Panel.",
+                        "type": "text/plain"
+                      },
+                      "key": "token",
+                      "value": "f6e5d4c3b2a1"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The data table to query.",
+                        "type": "text/plain"
+                      },
+                      "key": "table",
+                      "value": "orders"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Column name to filter on.",
+                        "type": "text/plain"
+                      },
+                      "key": "column",
+                      "value": "closed"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Inclusive lower bound for a range filter on the filter column.",
+                        "type": "text/plain"
+                      },
+                      "key": "value_min",
+                      "value": "2011-01-01 00:00:00"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Inclusive upper bound for a range filter on the filter column.",
+                        "type": "text/plain"
+                      },
+                      "key": "value_max",
+                      "value": "2011-02-01 00:00:00"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Pagination control in `offset,count` format (e.g. `0,20`).",
+                        "type": "text/plain"
+                      },
+                      "key": "limit",
+                      "value": "0,20"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "58a3b168-b8b8-4073-ac1b-56f0b8977def",
+          "name": "Lavu Insert Records Into a POSLavu Table",
+          "request": {
+            "name": "Lavu Insert Records Into a POSLavu Table",
+            "description": {
+              "content": "Insert one or more records into a POSLavu data table. Send `cmd=insert`, the target `table`, and a `contents` field containing one or more XML `<row>` payloads. Writes target the v2 request server (https://admin.poslavu.com/v2/reqserv). On success for an order insert, the API returns a `<result>` element containing the new `<id>` and `<order_id>`. Note this path is documented via the `cmd=insert` POST variable rather than a distinct URL path; it is modeled here as a separate operation for clarity.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "insert"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "query"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "dataname",
+                  "value": "<string>",
+                  "description": "(Required) Account data name from the API tab of the POSLavu Control Panel."
+                },
+                {
+                  "disabled": false,
+                  "key": "key",
+                  "value": "<string>",
+                  "description": "(Required) API key from the API tab of the POSLavu Control Panel."
+                },
+                {
+                  "disabled": false,
+                  "key": "token",
+                  "value": "<string>",
+                  "description": "(Required) API token from the API tab of the POSLavu Control Panel."
+                },
+                {
+                  "disabled": false,
+                  "key": "cmd",
+                  "value": "<string>",
+                  "description": "(Required) Command selector; must be `insert` for write operations."
+                },
+                {
+                  "disabled": false,
+                  "key": "table",
+                  "value": "<string>",
+                  "description": "(Required) The data table to insert into."
+                },
+                {
+                  "disabled": false,
+                  "key": "contents",
+                  "value": "<string>",
+                  "description": "(Required) One or more XML `<row>` payloads representing the records to insert."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "015b1ea8-ba9d-4b3a-b527-8b13f38e4bbb",
+              "name": "XML `<result>` element with the new record id and order id.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "insert"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Account data name from the API tab of the POSLavu Control Panel.",
+                        "type": "text/plain"
+                      },
+                      "key": "dataname",
+                      "value": "MyRestaurant"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) API key from the API tab of the POSLavu Control Panel.",
+                        "type": "text/plain"
+                      },
+                      "key": "key",
+                      "value": "a1b2c3d4e5f6"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) API token from the API tab of the POSLavu Control Panel.",
+                        "type": "text/plain"
+                      },
+                      "key": "token",
+                      "value": "f6e5d4c3b2a1"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Command selector; must be `insert` for write operations.",
+                        "type": "text/plain"
+                      },
+                      "key": "cmd",
+                      "value": "insert"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The data table to insert into.",
+                        "type": "text/plain"
+                      },
+                      "key": "table",
+                      "value": "orders"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) One or more XML `<row>` payloads representing the records to insert.",
+                        "type": "text/plain"
+                      },
+                      "key": "contents",
+                      "value": "<row><opened>2011-09-06 16:10:00</opened><subtotal>14.25</subtotal><total>15.23</total><server>Ancori</server><guests>2</guests></row>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "79f37f94-853f-4ac6-9536-b18173d5b4fb",
+      "name": "Inventory",
+      "description": {
+        "content": "Ingredients and ingredient usage.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "bf6cc8de-f496-4522-94ac-fbbf7f8eca93",
+          "name": "Lavu Query a POSLavu Table",
+          "request": {
+            "name": "Lavu Query a POSLavu Table",
+            "description": {
+              "content": "Retrieve rows from a POSLavu data table. Provide the `dataname`, `key`, and `token` credentials from the API tab of the POSLavu Control Panel, select the `table`, and optionally filter with `column`/`value` (exact match) or `column`/`value_min`/`value_max` (range), and paginate with `limit` (offset,count). Responses are returned as XML `<row>` elements.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "query"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "dataname",
+                  "value": "<string>",
+                  "description": "(Required) Account data name from the API tab of the POSLavu Control Panel."
+                },
+                {
+                  "disabled": false,
+                  "key": "key",
+                  "value": "<string>",
+                  "description": "(Required) API key from the API tab of the POSLavu Control Panel."
+                },
+                {
+                  "disabled": false,
+                  "key": "token",
+                  "value": "<string>",
+                  "description": "(Required) API token from the API tab of the POSLavu Control Panel."
+                },
+                {
+                  "disabled": false,
+                  "key": "table",
+                  "value": "<string>",
+                  "description": "(Required) The data table to query."
+                },
+                {
+                  "disabled": false,
+                  "key": "column",
+                  "value": "<string>",
+                  "description": "Column name to filter on."
+                },
+                {
+                  "disabled": false,
+                  "key": "value",
+                  "value": "<string>",
+                  "description": "Exact value to match for the filter column."
+                },
+                {
+                  "disabled": false,
+                  "key": "value_min",
+                  "value": "<string>",
+                  "description": "Inclusive lower bound for a range filter on the filter column."
+                },
+                {
+                  "disabled": false,
+                  "key": "value_max",
+                  "value": "<string>",
+                  "description": "Inclusive upper bound for a range filter on the filter column."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<string>",
+                  "description": "Pagination control in `offset,count` format (e.g. `0,20`)."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "1b9887c6-6e83-435d-8f31-7000ed08a1d6",
+              "name": "XML document containing zero or more `<row>` elements.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Account data name from the API tab of the POSLavu Control Panel.",
+                        "type": "text/plain"
+                      },
+                      "key": "dataname",
+                      "value": "MyRestaurant"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) API key from the API tab of the POSLavu Control Panel.",
+                        "type": "text/plain"
+                      },
+                      "key": "key",
+                      "value": "a1b2c3d4e5f6"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) API token from the API tab of the POSLavu Control Panel.",
+                        "type": "text/plain"
+                      },
+                      "key": "token",
+                      "value": "f6e5d4c3b2a1"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The data table to query.",
+                        "type": "text/plain"
+                      },
+                      "key": "table",
+                      "value": "orders"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Column name to filter on.",
+                        "type": "text/plain"
+                      },
+                      "key": "column",
+                      "value": "closed"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Inclusive lower bound for a range filter on the filter column.",
+                        "type": "text/plain"
+                      },
+                      "key": "value_min",
+                      "value": "2011-01-01 00:00:00"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Inclusive upper bound for a range filter on the filter column.",
+                        "type": "text/plain"
+                      },
+                      "key": "value_max",
+                      "value": "2011-02-01 00:00:00"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Pagination control in `offset,count` format (e.g. `0,20`).",
+                        "type": "text/plain"
+                      },
+                      "key": "limit",
+                      "value": "0,20"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5659d281-2e46-4b12-b3a5-9957d3e98faf",
+          "name": "Lavu Insert Records Into a POSLavu Table",
+          "request": {
+            "name": "Lavu Insert Records Into a POSLavu Table",
+            "description": {
+              "content": "Insert one or more records into a POSLavu data table. Send `cmd=insert`, the target `table`, and a `contents` field containing one or more XML `<row>` payloads. Writes target the v2 request server (https://admin.poslavu.com/v2/reqserv). On success for an order insert, the API returns a `<result>` element containing the new `<id>` and `<order_id>`. Note this path is documented via the `cmd=insert` POST variable rather than a distinct URL path; it is modeled here as a separate operation for clarity.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "insert"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "query"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "dataname",
+                  "value": "<string>",
+                  "description": "(Required) Account data name from the API tab of the POSLavu Control Panel."
+                },
+                {
+                  "disabled": false,
+                  "key": "key",
+                  "value": "<string>",
+                  "description": "(Required) API key from the API tab of the POSLavu Control Panel."
+                },
+                {
+                  "disabled": false,
+                  "key": "token",
+                  "value": "<string>",
+                  "description": "(Required) API token from the API tab of the POSLavu Control Panel."
+                },
+                {
+                  "disabled": false,
+                  "key": "cmd",
+                  "value": "<string>",
+                  "description": "(Required) Command selector; must be `insert` for write operations."
+                },
+                {
+                  "disabled": false,
+                  "key": "table",
+                  "value": "<string>",
+                  "description": "(Required) The data table to insert into."
+                },
+                {
+                  "disabled": false,
+                  "key": "contents",
+                  "value": "<string>",
+                  "description": "(Required) One or more XML `<row>` payloads representing the records to insert."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "91f58813-f1de-489f-bff9-a36f5e2ed308",
+              "name": "XML `<result>` element with the new record id and order id.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "insert"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Account data name from the API tab of the POSLavu Control Panel.",
+                        "type": "text/plain"
+                      },
+                      "key": "dataname",
+                      "value": "MyRestaurant"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) API key from the API tab of the POSLavu Control Panel.",
+                        "type": "text/plain"
+                      },
+                      "key": "key",
+                      "value": "a1b2c3d4e5f6"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) API token from the API tab of the POSLavu Control Panel.",
+                        "type": "text/plain"
+                      },
+                      "key": "token",
+                      "value": "f6e5d4c3b2a1"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Command selector; must be `insert` for write operations.",
+                        "type": "text/plain"
+                      },
+                      "key": "cmd",
+                      "value": "insert"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The data table to insert into.",
+                        "type": "text/plain"
+                      },
+                      "key": "table",
+                      "value": "orders"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) One or more XML `<row>` payloads representing the records to insert.",
+                        "type": "text/plain"
+                      },
+                      "key": "contents",
+                      "value": "<row><opened>2011-09-06 16:10:00</opened><subtotal>14.25</subtotal><total>15.23</total><server>Ancori</server><guests>2</guests></row>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://admin.poslavu.com/cp/reqserv",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "2c59d480-aa1e-4464-85b9-a0ea89bbfb9e",
+    "name": "Lavu (POSLavu) API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "POST-based data API for the Lavu restaurant point-of-sale platform. A single request endpoint accepts form-encoded credentials (dataname, key, token) plus a `table` selector and returns XML `<row>` elements for the requested table. The documented tables expose menu structure (menu_groups, menu_categories, menu_items), floor layout (tables), and transactions (orders, order_contents, order_payments) along with inventory data (ingredients, ingredient_usage). Records can be written by adding `cmd=insert` and an XML `contents` payload. Documentation is published at admin.poslavu.com and credentials are retrieved from the API tab of the POSLavu Control Panel.\n\nContact Support:\n Name: Kin Lane\n Email: kin@apievangelist.com",
+      "type": "text/plain"
+    }
+  }
+}

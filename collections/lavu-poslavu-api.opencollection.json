@@ -1,0 +1,68 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Lavu (POSLavu) API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Menu",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Lavu Query a POSLavu Table",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://admin.poslavu.com/cp/reqserv/",
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "token",
+              "value": "{{token}}",
+              "placement": "query"
+            }
+          },
+          "docs": "Retrieve rows from a POSLavu data table. Provide the `dataname`, `key`, and `token` credentials from the API tab of the POSLavu Control Panel, select the `table`, and optionally filter with `column`/`value` (exact match) or `column`/`value_min`/`value_max` (range), and paginate with `limit` (offset,count). Responses are returned as XML `<row>` elements."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Orders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Lavu Insert Records Into a POSLavu Table",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://admin.poslavu.com/cp/reqserv/insert",
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "token",
+              "value": "{{token}}",
+              "placement": "query"
+            }
+          },
+          "docs": "Insert one or more records into a POSLavu data table. Send `cmd=insert`, the target `table`, and a `contents` field containing one or more XML `<row>` payloads. Writes target the v2 request server (https://admin.poslavu.com/v2/reqserv). On success for an order insert, the API returns a `<result>` element containing the new `<id>` and `<order_id>`. Note this path is documented via the `cmd=insert` POST variable rather than a distinct URL path; it is modeled here as a separate operation for clarit"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
