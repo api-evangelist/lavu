@@ -11,7 +11,7 @@ description: >-
   Credentials are retrieved from the API tab of the POSLavu Control Panel, and the developer documentation is published
   at admin.poslavu.com; API access comes with an active Lavu account.
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
   - Restaurant
   - Point of Sale
