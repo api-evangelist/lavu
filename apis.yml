@@ -44,6 +44,10 @@ apis:
       - type: OpenAPI
         url: openapi/lavu-poslavu-api.yml
 common:
+  - type: DomainSecurity
+    url: security/lavu-domain-security.yml
+  - type: Authentication
+    url: authentication/lavu-authentication.yml
   - type: Website
     url: https://lavu.com
   - type: Blog

@@ -1,0 +1,19 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/lavu-poslavu-api.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - query
+schemes:
+- name: posLavuCredentials
+  type: apiKey
+  in: query
+  parameter: token
+  description: POSLavu requests are authenticated with three form-encoded credentials (`dataname`,
+    `key`, `token`) issued in the API tab of the POSLavu Control Panel. OpenAPI cannot express
+    a multi-field credential as a single scheme; the `token` field is declared here as the representative
+    credential and all three are required on every request.
+  sources:
+  - openapi/lavu-poslavu-api.yml
