@@ -1,10 +1,19 @@
-# Spectral ruleset for the Lavu (POSLavu) API
-# Enforces the conventions observed across the api-evangelist/lavu OpenAPI specs:
-# POST-based table query interface, snake_case schema properties, form-urlencoded
-# request bodies, XML responses, Title Case tags, and "Lavu " summary prefix.
+# lavu — Spectral ruleset (strengthened)
+# Plain Spectral. Existing hand-authored rules preserved; measured rules added
+# from this provider's own OpenAPI conventions by strengthen_ruleset.py,
+# then self-validated against the spec.
+#
+# Provenance:
+#   - servers-https-only: 100% of servers already https (error)
+#   - servers-expected-domain: 2/2 servers on poslavu.com
+#   - schema-names-casing: pascal @ 100% (n=11)
+#   - schema-properties-casing: snake @ 100% (n=224)
+#   - operation-security-required: 2/2 ops declare per-op security
+#   - merge: kept 31 existing, added 4 measured, upgraded 0
+#   - added: servers-expected-domain, schema-names-casing, schema-properties-casing, no-empty-descriptions
+extends:
+  - spectral:oas
 rules:
-
-  # ── INFO / METADATA ───────────────────────────────────────────────
   info-title-required:
     description: The API must declare a title.
     severity: error
@@ -19,7 +28,7 @@ rules:
     then:
       function: pattern
       functionOptions:
-        match: "Lavu"
+        match: Lavu
   info-description-required:
     description: The API must have a meaningful description (min 40 chars).
     severity: warn
@@ -43,8 +52,6 @@ rules:
     then:
       field: contact
       function: truthy
-
-  # ── OPENAPI VERSION ───────────────────────────────────────────────
   openapi-version-3:
     description: Specs must use OpenAPI 3.0.x.
     severity: warn
@@ -52,9 +59,7 @@ rules:
     then:
       function: pattern
       functionOptions:
-        match: "^3\\.0\\.\\d+$"
-
-  # ── SERVERS ───────────────────────────────────────────────────────
+        match: ^3\.0\.\d+$
   servers-defined:
     description: At least one server must be defined.
     severity: error
@@ -69,7 +74,7 @@ rules:
     then:
       function: pattern
       functionOptions:
-        match: "^https://"
+        match: ^https://
   servers-description:
     description: Each server should be described.
     severity: info
@@ -77,8 +82,6 @@ rules:
     then:
       field: description
       function: truthy
-
-  # ── OPERATIONS ────────────────────────────────────────────────────
   operation-operationid-required:
     description: Every operation must declare an operationId.
     severity: error
@@ -93,7 +96,7 @@ rules:
     then:
       function: pattern
       functionOptions:
-        match: "^[a-z][a-zA-Z0-9]*$"
+        match: ^[a-z][a-zA-Z0-9]*$
   operation-summary-required:
     description: Every operation must have a summary.
     severity: warn
@@ -108,7 +111,7 @@ rules:
     then:
       function: pattern
       functionOptions:
-        match: "^Lavu "
+        match: '^Lavu '
   operation-description-required:
     description: Every operation must have a description.
     severity: warn
@@ -130,8 +133,6 @@ rules:
     then:
       field: x-microcks-operation
       function: truthy
-
-  # ── TAGS ──────────────────────────────────────────────────────────
   tags-defined:
     description: A global tags array should be defined.
     severity: info
@@ -153,13 +154,10 @@ rules:
     then:
       function: pattern
       functionOptions:
-        match: "^[A-Z][A-Za-z]+( [A-Z][A-Za-z]+)*$"
-
-  # ── REQUEST BODIES ────────────────────────────────────────────────
+        match: ^[A-Z][A-Za-z]+( [A-Z][A-Za-z]+)*$
   request-body-form-encoded:
-    description: >-
-      POSLavu accepts form-encoded request bodies; operations should expose an
-      application/x-www-form-urlencoded media type.
+    description: POSLavu accepts form-encoded request bodies; operations should expose an application/x-www-form-urlencoded
+      media type.
     severity: warn
     given: $.paths[*][post,put,patch].requestBody.content
     then:
@@ -172,14 +170,12 @@ rules:
     then:
       field: schema
       function: truthy
-
-  # ── RESPONSES ─────────────────────────────────────────────────────
   response-2xx-required:
     description: Every operation must define a 2xx success response.
     severity: warn
     given: $.paths[*][get,post,put,patch,delete].responses
     then:
-      field: "200"
+      field: '200'
       function: truthy
   response-description-required:
     description: Every response must have a description.
@@ -195,18 +191,15 @@ rules:
     then:
       field: application/xml
       function: truthy
-
-  # ── SCHEMAS — PROPERTY NAMING ─────────────────────────────────────
   schema-property-snake-case:
-    description: >-
-      Schema property names must be snake_case to match POSLavu table columns
-      (acronym columns such as UPC are exempt).
+    description: Schema property names must be snake_case to match POSLavu table columns (acronym columns
+      such as UPC are exempt).
     severity: warn
     given: $.components.schemas[*].properties.*~
     then:
       function: pattern
       functionOptions:
-        match: "^[a-z][a-z0-9_]*$|^[A-Z]+$"
+        match: ^[a-z][a-z0-9_]*$|^[A-Z]+$
   schema-property-type:
     description: Every schema property must declare a type or a $ref.
     severity: warn
@@ -216,8 +209,10 @@ rules:
       functionOptions:
         schema:
           anyOf:
-            - required: ["type"]
-            - required: ["$ref"]
+          - required:
+            - type
+          - required:
+            - $ref
   schema-property-description:
     description: Schema properties should carry a description.
     severity: info
@@ -226,16 +221,12 @@ rules:
       field: description
       function: truthy
   schema-table-enum:
-    description: >-
-      The table selector should be constrained to the documented POSLavu tables
-      via an enum.
+    description: The table selector should be constrained to the documented POSLavu tables via an enum.
     severity: info
     given: $.components.schemas.QueryRequest.properties.table
     then:
       field: enum
       function: truthy
-
-  # ── SECURITY ──────────────────────────────────────────────────────
   security-scheme-defined:
     description: At least one security scheme must be defined.
     severity: warn
@@ -255,4 +246,36 @@ rules:
     given: $.paths[*][get,post,put,patch,delete]
     then:
       field: security
+      function: truthy
+  servers-expected-domain:
+    description: Server URLs should be on the poslavu.com domain.
+    severity: warn
+    given: $.servers[*].url
+    then:
+      function: pattern
+      functionOptions:
+        match: poslavu\.com
+  schema-names-casing:
+    description: Component schema names should be PascalCase (the dominant convention in this API).
+    severity: warn
+    given: $.components.schemas
+    then:
+      field: '@key'
+      function: casing
+      functionOptions:
+        type: pascal
+  schema-properties-casing:
+    description: Schema properties should be snake_case (the dominant convention in this API).
+    severity: warn
+    given: $.components.schemas[*].properties
+    then:
+      field: '@key'
+      function: casing
+      functionOptions:
+        type: snake
+  no-empty-descriptions:
+    description: Descriptions must not be empty strings.
+    severity: warn
+    given: $..description
+    then:
       function: truthy
