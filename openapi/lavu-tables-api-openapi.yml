@@ -1,0 +1,195 @@
+openapi: 3.0.3
+info:
+  title: Lavu (POSLavu) Inventory Tables API
+  description: POST-based data API for the Lavu restaurant point-of-sale platform. A single request endpoint accepts form-encoded credentials (dataname, key, token) plus a `table` selector and returns XML `<row>` elements for the requested table. The documented tables expose menu structure (menu_groups, menu_categories, menu_items), floor layout (tables), and transactions (orders, order_contents, order_payments) along with inventory data (ingredients, ingredient_usage). Records can be written by adding `cmd=insert` and an XML `contents` payload. Documentation is published at admin.poslavu.com and credentials are retrieved from the API tab of the POSLavu Control Panel.
+  version: '1.0'
+  contact:
+    name: Kin Lane
+    email: kin@apievangelist.com
+  x-generated-from: documentation
+  x-source-url: https://admin.poslavu.com/cp/areas/api_doc.html
+  x-last-validated: '2026-06-02'
+servers:
+- url: https://admin.poslavu.com/cp/reqserv
+  description: Read endpoint (query tables)
+- url: https://admin.poslavu.com/v2/reqserv
+  description: Insert endpoint (write records)
+tags:
+- name: Tables
+  description: Restaurant floor table layout.
+paths:
+  /:
+    post:
+      operationId: queryTable
+      summary: Lavu Query a POSLavu Table
+      description: Retrieve rows from a POSLavu data table. Provide the `dataname`, `key`, and `token` credentials from the API tab of the POSLavu Control Panel, select the `table`, and optionally filter with `column`/`value` (exact match) or `column`/`value_min`/`value_max` (range), and paginate with `limit` (offset,count). Responses are returned as XML `<row>` elements.
+      tags:
+      - Tables
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/QueryRequest'
+            examples:
+              QueryTableRequestExample:
+                summary: Default queryTable request
+                x-microcks-default: true
+                value:
+                  dataname: MyRestaurant
+                  key: a1b2c3d4e5f6
+                  token: f6e5d4c3b2a1
+                  table: orders
+                  column: closed
+                  value_min: '2011-01-01 00:00:00'
+                  value_max: '2011-02-01 00:00:00'
+                  limit: 0,20
+      responses:
+        '200':
+          description: XML document containing zero or more `<row>` elements.
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RowList'
+              examples:
+                QueryTable200Example:
+                  summary: Default queryTable 200 response
+                  x-microcks-default: true
+                  value:
+                    row:
+                    - id: '1'
+                      order_id: '1'
+                      location: Dev West Side
+                      location_id: '9'
+                      opened: '2010-10-06 12:01:20'
+                      closed: '2011-01-26 17:16:31'
+                      subtotal: '40.50'
+                      taxrate: '0.06875'
+                      tax: '2.78'
+                      total: '43.28'
+                      server: Ancori Lifigi
+                      server_id: '5'
+                      tablename: Booth 7
+                      send_status: '1'
+                      discount: '0.00'
+                      discount_sh: ''
+                      gratuity: '0.00'
+                      gratuity_percent: '0.2250'
+                      card_gratuity: '0.00'
+                      cash_paid: '46.64'
+                      card_paid: '0.00'
+                      gift_certificate: '0.00'
+                      change_amount: '3.36'
+                      reopen_refund: '0.00'
+                      void: '1'
+                      cashier: Ancori Lifigi
+                      cashier_id: '5'
+                      auth_by: ''
+                      auth_by_id: '0'
+                      guests: '1'
+                      email: ''
+                      permission: '0'
+                      check_has_printed: '1'
+                      no_of_checks: '2'
+                      card_desc: ''
+                      transaction_id: ''
+                      multiple_tax_rates: '0'
+                      tab: '0'
+                      original_id: '0'
+                      deposit_status: '0'
+                      register: ''
+                      refunded: '0'
+                      refund_notes: ''
+                      refunded_cc: ''
+                      refund_notes_cc: ''
+                      refunded_by: '0'
+                      refunded_by_cc: '0'
+                      cash_tip: ''
+                      discount_value: ''
+                      reopened_datetime: ''
+                      discount_type: ''
+                      deposit_amount: ''
+                      subtotal_without_deposit: ''
+                      togo_status: ''
+                      togo_phone: ''
+                      togo_time: ''
+                      cash_applied: '43.28'
+                      rounding_amount: ''
+      security:
+      - posLavuCredentials: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    RowList:
+      type: object
+      description: A list of table rows returned by a query.
+      properties:
+        row:
+          type: array
+          description: The returned rows. Each row's fields depend on the queried table.
+          items:
+            type: object
+            additionalProperties: true
+    QueryRequest:
+      type: object
+      description: Form-encoded fields for a table query request.
+      required:
+      - dataname
+      - key
+      - token
+      - table
+      properties:
+        dataname:
+          type: string
+          description: Account data name from the API tab of the POSLavu Control Panel.
+          example: MyRestaurant
+        key:
+          type: string
+          description: API key from the API tab of the POSLavu Control Panel.
+          example: a1b2c3d4e5f6
+        token:
+          type: string
+          description: API token from the API tab of the POSLavu Control Panel.
+          example: f6e5d4c3b2a1
+        table:
+          type: string
+          description: The data table to query.
+          enum:
+          - menu_groups
+          - menu_categories
+          - menu_items
+          - tables
+          - orders
+          - order_contents
+          - order_payments
+          - ingredients
+          - ingredient_usage
+          example: orders
+        column:
+          type: string
+          description: Column name to filter on.
+          example: closed
+        value:
+          type: string
+          description: Exact value to match for the filter column.
+          example: '1'
+        value_min:
+          type: string
+          description: Inclusive lower bound for a range filter on the filter column.
+          example: '2011-01-01 00:00:00'
+        value_max:
+          type: string
+          description: Inclusive upper bound for a range filter on the filter column.
+          example: '2011-02-01 00:00:00'
+        limit:
+          type: string
+          description: Pagination control in `offset,count` format (e.g. `0,20`).
+          example: 0,20
+  securitySchemes:
+    posLavuCredentials:
+      type: apiKey
+      in: query
+      name: token
+      description: POSLavu requests are authenticated with three form-encoded credentials (`dataname`, `key`, `token`) issued in the API tab of the POSLavu Control Panel. OpenAPI cannot express a multi-field credential as a single scheme; the `token` field is declared here as the representative credential and all three are required on every request.
