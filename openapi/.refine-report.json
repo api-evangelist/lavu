@@ -1,0 +1,20 @@
+{
+  "provider": "lavu",
+  "sources": [
+    "lavu-inventory-api-openapi.yml",
+    "lavu-menu-api-openapi.yml",
+    "lavu-orders-api-openapi.yml",
+    "lavu-tables-api-openapi.yml"
+  ],
+  "outputs": [
+    "lavu-inventory-api-openapi.yml",
+    "lavu-menu-api-openapi.yml",
+    "lavu-orders-api-openapi.yml",
+    "lavu-tables-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
