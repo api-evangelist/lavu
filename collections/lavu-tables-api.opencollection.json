@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Lavu (POSLavu) Inventory Tables API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tables",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Lavu Query a POSLavu Table",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://admin.poslavu.com/cp/reqserv/",
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "token",
+              "value": "{{token}}",
+              "placement": "query"
+            }
+          },
+          "docs": "Retrieve rows from a POSLavu data table. Provide the `dataname`, `key`, and `token` credentials from the API tab of the POSLavu Control Panel, select the `table`, and optionally filter with `column`/`value` (exact match) or `column`/`value_min`/`value_max` (range), and paginate with `limit` (offset,count). Responses are returned as XML `<row>` elements."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
