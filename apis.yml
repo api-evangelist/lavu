@@ -27,6 +27,12 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/lavu.png
 tags:
   - Restaurant
+  - Point-of-Sale
+  - Payments
+  - Inventory
+  - Menu Management
+tags_raw:
+  - Restaurant
   - Point of Sale
   - Payments
   - Inventory
@@ -52,6 +58,8 @@ apis:
   name: Lavu Menu API
   description: Menu groups, categories, and items.
   tags:
+  - Menus
+  tags_raw:
   - Menu
   properties:
   - type: OpenAPI
@@ -64,6 +72,8 @@ apis:
   name: Lavu Orders API
   description: Orders, order contents, and payments.
   tags:
+  - Order
+  tags_raw:
   - Orders
   properties:
   - type: OpenAPI
