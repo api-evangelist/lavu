@@ -42,18 +42,6 @@ created: '2026-06-02'
 modified: '2026-06-02'
 specificationVersion: '0.23'
 apis:
-- aid: lavu:lavu-inventory-api
-  name: Lavu Inventory API
-  description: Ingredients and ingredient usage.
-  tags:
-  - Inventory
-  properties:
-  - type: OpenAPI
-    url: openapi/lavu-inventory-api-openapi.yml
-  - type: Documentation
-    url: https://admin.poslavu.com/cp/areas/api_doc.html
-  - type: Documentation
-    url: https://lavu.com/integrations/
 - aid: lavu:lavu-menu-api
   name: Lavu Menu API
   description: Menu groups, categories, and items.
@@ -78,18 +66,6 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/lavu-orders-api-openapi.yml
-  - type: Documentation
-    url: https://admin.poslavu.com/cp/areas/api_doc.html
-  - type: Documentation
-    url: https://lavu.com/integrations/
-- aid: lavu:lavu-tables-api
-  name: Lavu Tables API
-  description: Restaurant floor table layout.
-  tags:
-  - Tables
-  properties:
-  - type: OpenAPI
-    url: openapi/lavu-tables-api-openapi.yml
   - type: Documentation
     url: https://admin.poslavu.com/cp/areas/api_doc.html
   - type: Documentation
