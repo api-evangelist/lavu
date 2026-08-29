@@ -1,20 +1,21 @@
 {
   "provider": "lavu",
   "sources": [
-    "lavu-inventory-api-openapi.yml",
-    "lavu-menu-api-openapi.yml",
-    "lavu-orders-api-openapi.yml",
-    "lavu-tables-api-openapi.yml"
+    "lavu-poslavu-api.yml"
   ],
   "outputs": [
-    "lavu-inventory-api-openapi.yml",
     "lavu-menu-api-openapi.yml",
-    "lavu-orders-api-openapi.yml",
-    "lavu-tables-api-openapi.yml"
+    "lavu-orders-api-openapi.yml"
   ],
-  "archived": [],
+  "archived": [
+    "archived openapi/lavu-poslavu-api.yml"
+  ],
   "errors": [],
   "warnings": [],
-  "notes": [],
+  "notes": [
+    "lavu-poslavu-api.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "lavu-poslavu-api.yml: multi-axis tagging (4 tags, 2 first tags, 3.50x duplication over 2 operations) \u2014 split on first tag, 2 operations narrowed",
+    "apis.yml register: already-registered"
+  ],
   "skipped": []
 }

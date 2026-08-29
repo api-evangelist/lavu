@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Lavu (POSLavu) Inventory Menu API
+  title: Lavu (POSLavu) Menu API
   description: POST-based data API for the Lavu restaurant point-of-sale platform. A single request endpoint accepts form-encoded credentials (dataname, key, token) plus a `table` selector and returns XML `<row>` elements for the requested table. The documented tables expose menu structure (menu_groups, menu_categories, menu_items), floor layout (tables), and transactions (orders, order_contents, order_payments) along with inventory data (ingredients, ingredient_usage). Records can be written by adding `cmd=insert` and an XML `contents` payload. Documentation is published at admin.poslavu.com and credentials are retrieved from the API tab of the POSLavu Control Panel.
   version: '1.0'
   contact:
@@ -120,116 +120,8 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
-  /insert:
-    post:
-      operationId: insertRecords
-      summary: Lavu Insert Records Into a POSLavu Table
-      description: Insert one or more records into a POSLavu data table. Send `cmd=insert`, the target `table`, and a `contents` field containing one or more XML `<row>` payloads. Writes target the v2 request server (https://admin.poslavu.com/v2/reqserv). On success for an order insert, the API returns a `<result>` element containing the new `<id>` and `<order_id>`. Note this path is documented via the `cmd=insert` POST variable rather than a distinct URL path; it is modeled here as a separate operation for clarity.
-      tags:
-      - Menu
-      requestBody:
-        required: true
-        content:
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/InsertRequest'
-            examples:
-              InsertRecordsRequestExample:
-                summary: Default insertRecords request
-                x-microcks-default: true
-                value:
-                  dataname: MyRestaurant
-                  key: a1b2c3d4e5f6
-                  token: f6e5d4c3b2a1
-                  cmd: insert
-                  table: orders
-                  contents: <row><opened>2011-09-06 16:10:00</opened><subtotal>14.25</subtotal><total>15.23</total><server>Ancori</server><guests>2</guests></row>
-      responses:
-        '200':
-          description: XML `<result>` element with the new record id and order id.
-          content:
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/InsertResult'
-              examples:
-                InsertRecords200Example:
-                  summary: Default insertRecords 200 response
-                  x-microcks-default: true
-                  value:
-                    id: '42'
-                    order_id: '42'
-      security:
-      - posLavuCredentials: []
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
 components:
   schemas:
-    InsertRequest:
-      type: object
-      description: Form-encoded fields for a record insert request.
-      required:
-      - dataname
-      - key
-      - token
-      - cmd
-      - table
-      - contents
-      properties:
-        dataname:
-          type: string
-          description: Account data name from the API tab of the POSLavu Control Panel.
-          example: MyRestaurant
-        key:
-          type: string
-          description: API key from the API tab of the POSLavu Control Panel.
-          example: a1b2c3d4e5f6
-        token:
-          type: string
-          description: API token from the API tab of the POSLavu Control Panel.
-          example: f6e5d4c3b2a1
-        cmd:
-          type: string
-          description: Command selector; must be `insert` for write operations.
-          enum:
-          - insert
-          example: insert
-        table:
-          type: string
-          description: The data table to insert into.
-          enum:
-          - orders
-          - order_contents
-          - order_payments
-          - menu_items
-          - ingredients
-          example: orders
-        contents:
-          type: string
-          description: One or more XML `<row>` payloads representing the records to insert.
-          example: <row><opened>2011-09-06 16:10:00</opened><total>15.23</total></row>
-    RowList:
-      type: object
-      description: A list of table rows returned by a query.
-      properties:
-        row:
-          type: array
-          description: The returned rows. Each row's fields depend on the queried table.
-          items:
-            type: object
-            additionalProperties: true
-    InsertResult:
-      type: object
-      description: Result of an insert operation.
-      properties:
-        id:
-          type: string
-          description: Identifier of the newly created entry.
-          example: '42'
-        order_id:
-          type: string
-          description: Order identifier assigned to a newly created order.
-          example: '42'
     QueryRequest:
       type: object
       description: Form-encoded fields for a table query request.
@@ -285,6 +177,16 @@ components:
           type: string
           description: Pagination control in `offset,count` format (e.g. `0,20`).
           example: 0,20
+    RowList:
+      type: object
+      description: A list of table rows returned by a query.
+      properties:
+        row:
+          type: array
+          description: The returned rows. Each row's fields depend on the queried table.
+          items:
+            type: object
+            additionalProperties: true
   securitySchemes:
     posLavuCredentials:
       type: apiKey
