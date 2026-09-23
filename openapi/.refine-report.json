@@ -1,21 +1,23 @@
 {
   "provider": "lavu",
   "sources": [
-    "lavu-poslavu-api.yml"
+    "_ae-authored/lavu-poslavu-api.yml"
   ],
   "outputs": [
     "lavu-menu-api-openapi.yml",
     "lavu-orders-api-openapi.yml"
   ],
-  "archived": [
-    "archived openapi/lavu-poslavu-api.yml"
-  ],
+  "archived": [],
   "errors": [],
   "warnings": [],
   "notes": [
+    "sourced from openapi/_original/ (0 archived document(s)); previously refined output at the top level was skipped rather than re-split",
     "lavu-poslavu-api.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
     "lavu-poslavu-api.yml: multi-axis tagging (4 tags, 2 first tags, 3.50x duplication over 2 operations) \u2014 split on first tag, 2 operations narrowed",
     "apis.yml register: already-registered"
   ],
-  "skipped": []
+  "skipped": [
+    "lavu-menu-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "lavu-orders-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

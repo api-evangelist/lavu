@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
   title: Lavu (POSLavu) Menu API
-  description: POST-based data API for the Lavu restaurant point-of-sale platform. A single request endpoint accepts form-encoded credentials (dataname, key, token) plus a `table` selector and returns XML `<row>` elements for the requested table. The documented tables expose menu structure (menu_groups, menu_categories, menu_items), floor layout (tables), and transactions (orders, order_contents, order_payments) along with inventory data (ingredients, ingredient_usage). Records can be written by adding `cmd=insert` and an XML `contents` payload. Documentation is published at admin.poslavu.com and credentials are retrieved from the API tab of the POSLavu Control Panel.
+  description: POST-based data API for the Lavu restaurant point-of-sale platform.
   version: '1.0'
   contact:
     name: Kin Lane
@@ -22,7 +22,7 @@ paths:
     post:
       operationId: queryTable
       summary: Lavu Query a POSLavu Table
-      description: Retrieve rows from a POSLavu data table. Provide the `dataname`, `key`, and `token` credentials from the API tab of the POSLavu Control Panel, select the `table`, and optionally filter with `column`/`value` (exact match) or `column`/`value_min`/`value_max` (range), and paginate with `limit` (offset,count). Responses are returned as XML `<row>` elements.
+      description: Retrieve rows from a POSLavu data table. Provide the `dataname`, `key`, and `token` credentials from the API tab of the POSLavu Control Panel, select the `table`, and optionally filter with `column`/`value` (exact match) or `column`/`value_min`/`value_max` (range), and paginate with `limit` (offset,count). Responses are returned as XML `` elements.
       tags:
       - Menu
       requestBody:

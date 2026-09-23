@@ -1,0 +1,30 @@
+# Front Door AI Index — lavu — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: lavu
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: lavu.com
+  final_host: lavu.com
+  ownership: own
+  owner: lavu
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 14
+  host_score: 14
+  density: 2.02
+  words: 6918
+  tiers:
+    agentic: 3
+    core: 11
+    model: 0
+  ambiguous: 30
+  top_terms:
+    agent: 14
+    AI: 11
+    automation: 9
+    intelligence: 5
+    AI agent: 3
+    smart: 2
