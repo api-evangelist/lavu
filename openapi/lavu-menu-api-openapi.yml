@@ -122,16 +122,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    RowList:
-      type: object
-      description: A list of table rows returned by a query.
-      properties:
-        row:
-          type: array
-          description: The returned rows. Each row's fields depend on the queried table.
-          items:
-            type: object
-            additionalProperties: true
     QueryRequest:
       type: object
       description: Form-encoded fields for a table query request.
@@ -187,6 +177,16 @@ components:
           type: string
           description: Pagination control in `offset,count` format (e.g. `0,20`).
           example: 0,20
+    RowList:
+      type: object
+      description: A list of table rows returned by a query.
+      properties:
+        row:
+          type: array
+          description: The returned rows. Each row's fields depend on the queried table.
+          items:
+            type: object
+            additionalProperties: true
   securitySchemes:
     posLavuCredentials:
       type: apiKey
