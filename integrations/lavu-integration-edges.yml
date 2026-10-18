@@ -1,0 +1,34 @@
+generated: '2026-10-18'
+method: searched
+checked:
+- doordash/integrations/doordash-integration-edges.yml
+source:
+- doordash/integrations/doordash-integration-edges.yml
+edges:
+- partner_name: Doordash (own)
+  partner: doordash
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://merchants.doordash.com/en-us/preferred-integrations/compare-integrations
+  mirror_of: doordash/integrations/doordash-integration-edges.yml
+  apps:
+  - Lavu DoorDash integration
+  listing_count: 1
+  detected: '2026-10-18'
+  detected_by: mirror-platform-listings.py
+  category: Delivery marketplace integration (POS / middleware)
+  features:
+  - ITEM_LEVEL_86
+  - MENU_CONTAINS_ITEM_IMAGE_URL
+  - MENU_CONTAINS_ITEM_LEVEL_BASE_PRICE
+  - MENU_PULL_SUPPORTED
+  - RECEIVE_ORDER_CANCELLATION
+  - SSIO_INTEGRATION_ONBOARDING
+  - STORE_AVAILABILITY_WEBHOOKS
+  publisher_verified:
+  - DoorDash Certified Integration
